@@ -1,0 +1,194 @@
+{
+  "startups": {
+    "ai_security": [
+      "Noma Security",
+      "7AI",
+      "Protect AI",
+      "Robust Intelligence",
+      "Abnormal Security",
+      "DropZone AI",
+      "HiddenLayer",
+      "Gomboc",
+      "XBOW",
+      "Apex Security"
+    ],
+    "cloud_security": [
+      "Upwind Security",
+      "Orca Security",
+      "Wiz",
+      "Lacework",
+      "AccuKnox",
+      "Aqua Security",
+      "Orca Security",
+      "Ermetic"
+    ],
+    "appsec_devsecops": [
+      "Snyk",
+      "Semgrep",
+      "Apiiro",
+      "Legit Security",
+      "Endor Labs",
+      "Ox Security",
+      "Oligo Security",
+      "ArmorCode",
+      "Cycode",
+      "Chainguard",
+      "Socket",
+      "Phylum",
+      "Kusari"
+    ],
+    "offensive_security": [
+      "Bishop Fox",
+      "NetSPI",
+      "Cobalt",
+      "Horizon3.ai",
+      "OccamSec",
+      "Synack",
+      "Redbot Security"
+    ],
+    "bug_bounty": [
+      "HackerOne",
+      "Bugcrowd",
+      "Intigriti",
+      "YesWeHack"
+    ],
+    "dfir_soc_automation": [
+      "BreachRX",
+      "Cado Security",
+      "Binalyze",
+      "Intezer",
+      "ReliaQuest",
+      "Cribl",
+      "Lucidum",
+      "Securonix",
+      "Exabeam",
+      "LogRhythm"
+    ],
+    "threat_intelligence": [
+      "Recorded Future",
+      "Unit 221B",
+      "Mandiant",
+      "Flashpoint",
+      "Intel 471",
+      "Analyst1"
+    ],
+    "identity_zero_trust": [
+      "Saviynt",
+      "ConductorOne",
+      "Zero Networks",
+      "Aembit",
+      "Descope",
+      "Veza",
+      "Astrix Security"
+    ],
+    "iot_embedded_ot": [
+      "Claroty",
+      "Nozomi Networks",
+      "Dragos",
+      "Exein",
+      "Armis"
+    ],
+    "privacy_data": [
+      "Cyera",
+      "BigID",
+      "Drata",
+      "Securiti"
+    ]
+  },
+  "big_tech_enterprise": {
+    "faang": [
+      "Microsoft",
+      "Google",
+      "Apple",
+      "Amazon",
+      "Meta"
+    ],
+    "cybersecurity_majors": [
+      "CrowdStrike",
+      "Palo Alto Networks",
+      "Fortinet",
+      "Zscaler",
+      "SentinelOne",
+      "Rapid7",
+      "Tenable",
+      "Qualys",
+      "Check Point Software",
+      "Trellix",
+      "Arctic Wolf"
+    ],
+    "large_tech": [
+      "IBM",
+      "Cisco",
+      "Oracle",
+      "Intel",
+      "NVIDIA",
+      "Salesforce",
+      "Splunk",
+      "Elastic",
+      "Cloudflare",
+      "Akamai",
+      "Databricks",
+      "Snowflake",
+      "Red Hat"
+    ],
+    "finance": [
+      "Goldman Sachs",
+      "JPMorgan Chase",
+      "Morgan Stanley",
+      "Capital One",
+      "Visa",
+      "Mastercard",
+      "Stripe",
+      "Bloomberg"
+    ],
+    "consulting": [
+      "Deloitte",
+      "Accenture",
+      "PwC",
+      "EY",
+      "KPMG"
+    ],
+    "other_tech": [
+      "PayPal",
+      "Uber",
+      "Airbnb",
+      "Netflix",
+      "Snap",
+      "Palantir"
+    ]
+  },
+  "research_labs": {
+    "university": [
+      "CMU CyLab",
+      "Stanford Computer Security Laboratory",
+      "MIT CSAIL Security Group",
+      "Georgia Tech CIPHER",
+      "UC Berkeley CLTC",
+      "International Computer Science Institute (ICSI)",
+      "University of Toronto Citizen Lab"
+    ],
+    "national_government": [
+      "Sandia National Laboratories",
+      "NIST NCCoE",
+      "MITRE Corporation",
+      "Pacific Northwest National Laboratory",
+      "Oak Ridge National Laboratory"
+    ],
+    "independent": [
+      "Trail of Bits",
+      "NCC Group",
+      "SRI International"
+    ],
+    "european": [
+      "CISPA Helmholtz Center for Information Security",
+      "Fraunhofer SIT",
+      "INRIA",
+      "ETH Zurich Center for Security Studies",
+      "Max Planck Institute for Security and Privacy"
+    ],
+    "nonprofit": [
+      "OWASP Foundation",
+      "Electronic Frontier Foundation"
+    ]
+  }
+}

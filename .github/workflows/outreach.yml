@@ -1,0 +1,73 @@
+name: Internship Outreach — Francis Konikkara
+
+on:
+  schedule:
+    # 8:00am ET = 12:00pm UTC, Monday through Friday
+    - cron: '0 12 * * 1-5'
+  workflow_dispatch:
+    # Allows manual trigger from GitHub Actions UI → Run workflow
+
+jobs:
+  send-emails:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: write   # needed to commit updated tracker back to repo
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Python setup ──────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── 3. Restore secrets from GitHub Secrets ───────────────────────────
+      - name: Restore Gmail OAuth token
+        run: |
+          echo "${{ secrets.GMAIL_TOKEN_B64 }}" | base64 -d > token.json
+          echo "token.json restored"
+
+      - name: Restore resume PDF
+        run: |
+          mkdir -p resume
+          echo "${{ secrets.RESUME_PDF_B64 }}" | base64 -d > resume/Francis_Konikkara_Resume.pdf
+          echo "Resume PDF restored"
+
+      # ── 4. Run outreach pipeline ─────────────────────────────────────────
+      - name: Run outreach
+        env:
+          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_SENDER:        ${{ secrets.GMAIL_SENDER }}
+          RESUME_PDF_PATH:     resume/Francis_Konikkara_Resume.pdf
+          EMAILS_PER_RUN:      ${{ vars.EMAILS_PER_RUN || '10' }}
+        run: python main.py --run-now
+
+      # ── 5. Commit updated tracker back to repo ───────────────────────────
+      - name: Commit updated outreach tracker
+        if: success()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add outreach_tracker.json
+          git diff --cached --quiet || git commit -m "chore: update outreach tracker [skip ci]"
+          git push
+
+      # ── 6. Upload log as artifact for review ─────────────────────────────
+      - name: Upload outreach log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: outreach-log-${{ github.run_id }}
+          path: outreach.log
+          retention-days: 30

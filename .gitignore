@@ -1,0 +1,42 @@
+# Secrets — NEVER commit these
+.env
+token.json
+credentials.json
+
+# Resume outputs (generated, not tracked)
+resume_outputs/
+*.pdf
+
+# Logs
+outreach.log
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Base resume DOCX — keep out of repo for privacy
+resume/
+
+# Note: outreach_tracker.json IS tracked (committed back after each run)
