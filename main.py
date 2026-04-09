@@ -13,6 +13,9 @@ Usage:
 import argparse
 import json
 import logging
+
+from dotenv import load_dotenv
+load_dotenv()  # loads .env file into environment variables
 import os
 import random
 import sys
