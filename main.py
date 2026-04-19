@@ -26,12 +26,17 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from contact_finder import find_contact
 from email_writer import write_email, _classify_target_role
 from gmail_sender import send_email
-from researcher import research_company
+from researcher import discover_companies, research_company
 from resume_tailor import tailor_resume
 from tracker import add_entry, get_contacted_companies
 
 BASE_DIR = os.path.dirname(__file__)
 TARGET_LIST = os.path.join(BASE_DIR, "target_companies.json")
+
+# When fewer than this many uncontacted companies remain, auto-discover more
+COMPANY_REFRESH_THRESHOLD = int(os.getenv("COMPANY_REFRESH_THRESHOLD", "15"))
+# How many new companies to discover each refresh
+COMPANY_REFRESH_COUNT = int(os.getenv("COMPANY_REFRESH_COUNT", "20"))
 
 logging.basicConfig(
     level=logging.INFO,
@@ -76,12 +81,76 @@ def _load_target_companies(contacted: set[str], count: int) -> list[str]:
     return fresh[:count]
 
 
+def _refresh_company_list(contacted: set[str]) -> int:
+    """
+    If the uncontacted company pool is running low, discover new companies via
+    web search and append them to target_companies.json under the 'discovered'
+    category. Returns the number of new companies added.
+    """
+    try:
+        with open(TARGET_LIST) as f:
+            data = json.load(f)
+    except Exception as e:
+        logger.error(f"Could not read {TARGET_LIST}: {e}")
+        return 0
+
+    # Count currently uncontacted companies
+    all_companies: list[str] = []
+    for category in data.values():
+        if isinstance(category, list):
+            all_companies.extend(category)
+        elif isinstance(category, dict):
+            for sublist in category.values():
+                all_companies.extend(sublist)
+
+    fresh_count = sum(1 for c in all_companies if c.lower() not in contacted)
+
+    if fresh_count >= COMPANY_REFRESH_THRESHOLD:
+        logger.info(
+            f"Company pool has {fresh_count} uncontacted entries — no refresh needed "
+            f"(threshold: {COMPANY_REFRESH_THRESHOLD})."
+        )
+        return 0
+
+    logger.info(
+        f"Only {fresh_count} uncontacted companies left. "
+        f"Discovering {COMPANY_REFRESH_COUNT} more via web search..."
+    )
+
+    existing_lower = {c.lower() for c in all_companies}
+    new_companies = discover_companies(contacted | existing_lower, count=COMPANY_REFRESH_COUNT)
+
+    if not new_companies:
+        logger.warning("Company discovery returned no new companies.")
+        return 0
+
+    # Append under 'discovered' key, preserving existing data
+    if "discovered" not in data:
+        data["discovered"] = []
+    data["discovered"].extend(new_companies)
+
+    try:
+        with open(TARGET_LIST, "w") as f:
+            json.dump(data, f, indent=2)
+        logger.info(f"Added {len(new_companies)} new companies to target_companies.json: {new_companies}")
+    except Exception as e:
+        logger.error(f"Could not write updated company list: {e}")
+        return 0
+
+    return len(new_companies)
+
+
 def run_outreach():
     logger.info("=" * 60)
     logger.info(f"Starting outreach run at {datetime.now().isoformat()}")
 
     contacted = get_contacted_companies()
     logger.info(f"Already contacted {len(contacted)} companies.")
+
+    # Auto-refresh company list if running low
+    added = _refresh_company_list(contacted)
+    if added:
+        logger.info(f"Company list refreshed: +{added} new companies added.")
 
     companies = _load_target_companies(contacted, EMAILS_PER_RUN)
     if not companies:

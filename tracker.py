@@ -1,9 +1,15 @@
 import json
 import os
-from datetime import date
+from datetime import date, datetime
 
-TRACKER_PATH = os.path.join(os.path.dirname(__file__), "outreach_tracker.json")
+BASE_DIR = os.path.dirname(__file__)
+TRACKER_PATH = os.path.join(BASE_DIR, "outreach_tracker.json")
+SENT_LOG_PATH = os.path.join(BASE_DIR, "sent_companies.json")
 
+
+# ---------------------------------------------------------------------------
+# Core tracker (deduplication + full metadata)
+# ---------------------------------------------------------------------------
 
 def load_tracker() -> list[dict]:
     if not os.path.exists(TRACKER_PATH):
@@ -38,6 +44,55 @@ def add_entry(
     with open(TRACKER_PATH, "w") as f:
         json.dump(tracker, f, indent=2)
 
+    # Also write to the human-readable sent log
+    _log_sent_company(company, contact_email, contact_name, subject)
+
+
+# ---------------------------------------------------------------------------
+# Human-readable sent log
+# ---------------------------------------------------------------------------
+
+def _log_sent_company(
+    company: str,
+    contact_email: str,
+    contact_name: str,
+    subject: str,
+) -> None:
+    """
+    Append one entry to sent_companies.json — a flat, human-readable list of
+    every company successfully emailed, with timestamp.
+    """
+    if os.path.exists(SENT_LOG_PATH):
+        with open(SENT_LOG_PATH, "r") as f:
+            log: list[dict] = json.load(f)
+    else:
+        log = []
+
+    log.append(
+        {
+            "company": company,
+            "contact_email": contact_email,
+            "contact_name": contact_name,
+            "subject": subject,
+            "sent_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        }
+    )
+
+    with open(SENT_LOG_PATH, "w") as f:
+        json.dump(log, f, indent=2)
+
+
+def load_sent_log() -> list[dict]:
+    """Return all entries from sent_companies.json."""
+    if not os.path.exists(SENT_LOG_PATH):
+        return []
+    with open(SENT_LOG_PATH, "r") as f:
+        return json.load(f)
+
+
+# ---------------------------------------------------------------------------
+# CLI summary
+# ---------------------------------------------------------------------------
 
 def print_summary() -> None:
     """Print a summary of all outreach activity."""

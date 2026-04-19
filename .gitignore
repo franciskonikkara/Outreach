@@ -40,3 +40,6 @@ Thumbs.db
 resume/
 
 # Note: outreach_tracker.json IS tracked (committed back after each run)
+
+# Nested repo — not part of this project
+Outreach/

@@ -1,98 +1,72 @@
 [
   {
-    "company": "PayPal",
-    "contact_email": "lead@paypal.com",
-    "contact_name": "Lead Software (Security Engineering Manager)",
-    "date_sent": "2026-04-09",
-    "subject": "PayPal Bank and product security for fintech",
-    "status": "sent"
-  },
-  {
-    "company": "Stripe",
-    "contact_email": "security@stripe.com",
-    "contact_name": "security team inbox",
-    "date_sent": "2026-04-09",
-    "subject": "Stripe's security education requirement for every employee caught my attention \u2014 that's a rare commitment to defense-in-depth.",
-    "status": "sent"
-  },
-  {
     "company": "Trellix",
     "contact_email": "enterprise@trellix.com",
     "contact_name": "Enterprise Security (Security Engineering Manager)",
-    "date_sent": "2026-04-16",
     "subject": "Trellix NDR and threat hunting \u2014 summer internship",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:44"
   },
   {
     "company": "Cribl",
     "contact_email": "sshah@cribl.io",
     "contact_name": "Sshah",
-    "date_sent": "2026-04-16",
     "subject": "Cribl Guard looks like a smart move for the forensics side of incident response",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:45"
   },
   {
     "company": "BigID",
     "contact_email": "yarisg@bigid.com",
     "contact_name": "Yarisg",
-    "date_sent": "2026-04-16",
     "subject": "BigID's AI classification layer and what it means for detection",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:45"
   },
   {
     "company": "Semgrep",
     "contact_email": "security@semgrep.dev",
     "contact_name": "security team inbox",
-    "date_sent": "2026-04-16",
     "subject": "Semgrep Multimodal: Security intern interested in AI-powered detection",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:46"
   },
   {
     "company": "ReliaQuest",
     "contact_email": "athurman@reliaquest.com",
     "contact_name": "Athurman",
-    "date_sent": "2026-04-16",
     "subject": "ReliaQuest GreyMatter and 4-minute breakout detection",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:46"
   },
   {
     "company": "Lucidum",
     "contact_email": "security@en.ynycyxgs.com",
     "contact_name": "security team inbox",
-    "date_sent": "2026-04-16",
     "subject": "Security Internship \u2014 Summer 2026",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:48"
   },
   {
     "company": "JPMorgan Chase",
     "contact_email": "security@jpmorganchase.com",
     "contact_name": "security team inbox",
-    "date_sent": "2026-04-16",
     "subject": "Security & Resiliency Initiative \u2014 Summer 2026 Intern",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:48"
   },
   {
     "company": "INRIA",
     "contact_email": "defense.securite@inria.fr",
     "contact_name": "Defense Securite",
-    "date_sent": "2026-04-16",
     "subject": "Defense Securit\u00e9 internship \u2014 Summer 2026",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:49"
   },
   {
     "company": "Rapid7",
     "contact_email": "john_manero@rapid7.com",
     "contact_name": "John Manero",
-    "date_sent": "2026-04-16",
     "subject": "Rapid7's unified endpoint-to-cloud platform and 24/7 MDR with unlimited IR access",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:49"
   },
   {
     "company": "Morgan Stanley",
     "contact_email": "opensource@morganstanley.com",
     "contact_name": "Opensource",
-    "date_sent": "2026-04-16",
     "subject": "Morgan Stanley security infrastructure + summer availability",
-    "status": "sent"
+    "sent_at": "2026-04-16 02:49"
   }
 ]
