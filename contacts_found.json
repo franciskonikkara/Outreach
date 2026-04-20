@@ -16,5 +16,68 @@
     "domain": "crowdstrike.com",
     "source": "hunter.io",
     "found_at": "2026-04-19 21:28"
+  },
+  {
+    "name": "Sarika Pandit",
+    "position": "Director of Information Security",
+    "company": "Red Hat",
+    "email": "spandit@redhat.com",
+    "domain": "redhat.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:51"
+  },
+  {
+    "name": "Andy Hull",
+    "position": "Director of Engineering",
+    "company": "Synack",
+    "email": "andy@synack.com",
+    "domain": "synack.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:51"
+  },
+  {
+    "name": "Tom Jolly",
+    "position": "Vice President of Engineering",
+    "company": "Microsoft",
+    "email": "tom.jolly@microsoft.com",
+    "domain": "microsoft.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:52"
+  },
+  {
+    "name": "Tami Krom",
+    "position": "Director of Sales",
+    "company": "Palo Alto Networks",
+    "email": "tkrom@paloaltonetworks.com",
+    "domain": "paloaltonetworks.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:52"
+  },
+  {
+    "name": "Gil Blau",
+    "position": "Director of Platform Engineering",
+    "company": "Astrix Security",
+    "email": "gil.blau@astrix.security",
+    "domain": "astrix.security",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:52"
+  },
+  {
+    "name": "Matt Hambrick",
+    "position": "Director of Software Engineering",
+    "company": "Oracle",
+    "email": "matt.hambrick@oracle.com",
+    "domain": "oracle.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:53"
+  },
+  {
+    "name": "Keith Cox",
+    "position": "Principal Security Engineer",
+    "company": "Redbot Security",
+    "email": "k.cox@redbotsecurity.com",
+    "domain": "redbotsecurity.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 14:53"
   }
 ]

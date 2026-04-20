@@ -68,5 +68,54 @@
     "contact_name": "Opensource",
     "subject": "Morgan Stanley security infrastructure + summer availability",
     "sent_at": "2026-04-16 02:49"
+  },
+  {
+    "company": "Red Hat",
+    "contact_email": "spandit@redhat.com",
+    "contact_name": "Sarika Pandit (Director of Information Security)",
+    "subject": "Red Hat's shift to production AI \u2014 security angle",
+    "sent_at": "2026-04-20 14:51"
+  },
+  {
+    "company": "Synack",
+    "contact_email": "andy@synack.com",
+    "contact_name": "Andy Hull (Director of Engineering)",
+    "subject": "Synack's human + AI pentest model cuts MTTR by 47%",
+    "sent_at": "2026-04-20 14:51"
+  },
+  {
+    "company": "Microsoft",
+    "contact_email": "tom.jolly@microsoft.com",
+    "contact_name": "Tom Jolly (Vice President of Engineering)",
+    "subject": "Security internship \u2014 Microsoft DevSecOps, summer 2026",
+    "sent_at": "2026-04-20 14:52"
+  },
+  {
+    "company": "Palo Alto Networks",
+    "contact_email": "tkrom@paloaltonetworks.com",
+    "contact_name": "Tami Krom (Director of Sales)",
+    "subject": "Palo Alto Networks + AI security internship \u2014 summer 2026",
+    "sent_at": "2026-04-20 14:52"
+  },
+  {
+    "company": "Astrix Security",
+    "contact_email": "gil.blau@astrix.security",
+    "contact_name": "Gil Blau (Director of Platform Engineering)",
+    "subject": "AI Agent Identity & Access \u2014 Summer Security Internship",
+    "sent_at": "2026-04-20 14:52"
+  },
+  {
+    "company": "Oracle",
+    "contact_email": "matt.hambrick@oracle.com",
+    "contact_name": "Matt Hambrick (Director of Software Engineering)",
+    "subject": "Oracle's January 2026 Critical Patch Update fixed 337 vulnerabilities, including CVE-2026-21962 in WebLogic \u2014 that scale of exposure across enterprise infrastructure is exactly where I want to work.",
+    "sent_at": "2026-04-20 14:53"
+  },
+  {
+    "company": "Redbot Security",
+    "contact_email": "k.cox@redbotsecurity.com",
+    "contact_name": "Keith Cox (Principal Security Engineer)",
+    "subject": "Redbot's manual senior-led approach to pen testing",
+    "sent_at": "2026-04-20 14:53"
   }
 ]

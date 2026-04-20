@@ -94,5 +94,61 @@
     "date_sent": "2026-04-16",
     "subject": "Morgan Stanley security infrastructure + summer availability",
     "status": "sent"
+  },
+  {
+    "company": "Red Hat",
+    "contact_email": "spandit@redhat.com",
+    "contact_name": "Sarika Pandit (Director of Information Security)",
+    "date_sent": "2026-04-20",
+    "subject": "Red Hat's shift to production AI \u2014 security angle",
+    "status": "sent"
+  },
+  {
+    "company": "Synack",
+    "contact_email": "andy@synack.com",
+    "contact_name": "Andy Hull (Director of Engineering)",
+    "date_sent": "2026-04-20",
+    "subject": "Synack's human + AI pentest model cuts MTTR by 47%",
+    "status": "sent"
+  },
+  {
+    "company": "Microsoft",
+    "contact_email": "tom.jolly@microsoft.com",
+    "contact_name": "Tom Jolly (Vice President of Engineering)",
+    "date_sent": "2026-04-20",
+    "subject": "Security internship \u2014 Microsoft DevSecOps, summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Palo Alto Networks",
+    "contact_email": "tkrom@paloaltonetworks.com",
+    "contact_name": "Tami Krom (Director of Sales)",
+    "date_sent": "2026-04-20",
+    "subject": "Palo Alto Networks + AI security internship \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Astrix Security",
+    "contact_email": "gil.blau@astrix.security",
+    "contact_name": "Gil Blau (Director of Platform Engineering)",
+    "date_sent": "2026-04-20",
+    "subject": "AI Agent Identity & Access \u2014 Summer Security Internship",
+    "status": "sent"
+  },
+  {
+    "company": "Oracle",
+    "contact_email": "matt.hambrick@oracle.com",
+    "contact_name": "Matt Hambrick (Director of Software Engineering)",
+    "date_sent": "2026-04-20",
+    "subject": "Oracle's January 2026 Critical Patch Update fixed 337 vulnerabilities, including CVE-2026-21962 in WebLogic \u2014 that scale of exposure across enterprise infrastructure is exactly where I want to work.",
+    "status": "sent"
+  },
+  {
+    "company": "Redbot Security",
+    "contact_email": "k.cox@redbotsecurity.com",
+    "contact_name": "Keith Cox (Principal Security Engineer)",
+    "date_sent": "2026-04-20",
+    "subject": "Redbot's manual senior-led approach to pen testing",
+    "status": "sent"
   }
 ]
