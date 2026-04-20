@@ -12,7 +12,7 @@ permissions:
 jobs:
   send-emails:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
@@ -34,22 +34,23 @@ jobs:
           GMAIL_TOKEN_B64: ${{ secrets.GMAIL_TOKEN_B64 }}
         run: echo "$GMAIL_TOKEN_B64" | base64 --decode > token.json
 
-      - name: Run outreach
+      - name: Run outreach (professional + PhD)
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GMAIL_SENDER:      ${{ secrets.GMAIL_SENDER }}
-          HUNTER_API_KEY:    ${{ secrets.HUNTER_API_KEY }}
-          APOLLO_API_KEY:    ${{ secrets.APOLLO_API_KEY }}
-          RESUME_PDF_PATH:   resume/Francis_Konikkara_Resume.pdf
-          EMAILS_PER_RUN:    "5"
+          ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_SENDER:       ${{ secrets.GMAIL_SENDER }}
+          HUNTER_API_KEY:     ${{ secrets.HUNTER_API_KEY }}
+          APOLLO_API_KEY:     ${{ secrets.APOLLO_API_KEY }}
+          RESUME_PDF_PATH:    resume/Francis_Konikkara_Resume.pdf
+          EMAILS_PER_RUN:     "10"
+          PHD_EMAILS_PER_RUN: "10"
         run: python main.py --run-now
 
-      - name: Commit updated files
+      - name: Commit updated trackers
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add outreach_tracker.json sent_companies.json contacts_found.json target_companies.json 2>/dev/null || true
-          git diff --cached --quiet || git commit -m "chore: update outreach tracker [skip ci]"
+          git add outreach_tracker.json sent_companies.json contacts_found.json target_companies.json phd_tracker.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore: update outreach trackers [skip ci]"
           git push
         continue-on-error: true
 

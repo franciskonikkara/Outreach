@@ -200,6 +200,94 @@ Output ONLY the email — subject line first (no "Subject:" prefix), then a blan
         return None
 
 
+PHD_HUMANIZER_RULES = """
+STRICT RULES FOR PHD COLLABORATION EMAIL:
+
+=== BANNED WORDS ===
+Additionally, Furthermore, Moreover, testament to, landscape, showcasing, delve, crucial,
+vital, leverage, utilize, impactful, passionate, excited, eager, genuinely, straightforward,
+delighted, thrilled, pivotal, groundbreaking, remarkable, incredible, impressive, breathtaking,
+synergy, collaboration opportunities, mutually beneficial.
+
+=== BANNED CONSTRUCTIONS ===
+- No bullet points or lists
+- No em dashes
+- No "I came across your work and was immediately drawn to"
+- No "I've always admired your research"
+- No "Your work is groundbreaking/remarkable"
+- No "I would love to pick your brain"
+- No "I am a passionate student seeking mentorship"
+- No generic openers like "I hope this email finds you well"
+- No chatbot closings like "Looking forward to your response!"
+
+=== WHAT TO DO ===
+- Opening: one specific sentence about their actual research — name the paper, technique,
+  or problem they work on. Show you actually read it.
+- 2-3 sentences about what Francis is building or researching that connects to their work.
+  Be specific — name the tool, method, or problem.
+- One concrete ask: a 20-minute call, feedback on a specific idea, or asking if there's
+  room to contribute to a specific part of their research.
+- Keep it peer-to-peer. Francis is a grad student reaching out to a fellow researcher,
+  not a fan asking for mentorship.
+- Sign-off: Francis Konikkara | francisanthony0328@gmail.com | github.com/franciskonikkara
+
+=== LENGTH AND TONE ===
+- 120-160 words. Hard cap.
+- Direct and specific. No flattery. No fluff.
+- Subject line: reference their research topic specifically. NOT "Collaboration request"
+
+=== FINAL AUDIT ===
+Re-read and remove any AI-speak, flattery, or vague phrases before outputting.
+"""
+
+PHD_SYSTEM_PROMPT = (
+    "You are writing a research collaboration email on behalf of Francis Konikkara, "
+    "a cybersecurity graduate student at UMD. Write peer-to-peer — direct, specific, "
+    "no AI-speak, no flattery. Francis is reaching out as a fellow researcher."
+)
+
+
+def write_phd_email(student: dict) -> tuple[str, str] | None:
+    """
+    Write a research collaboration email to a PhD student.
+    student dict: {name, email, university, research_area, recent_work, source}
+    Returns (subject, body) or None on failure.
+    """
+    name = student.get("name", "the researcher")
+    first_name = name.split()[0] if name else "Hi"
+    university = student.get("university", "your university")
+    research_area = student.get("research_area", "cybersecurity")
+    recent_work = student.get("recent_work", "")
+
+    research_context = f"Research area: {research_area}"
+    if recent_work:
+        research_context += f"\nRecent work / paper: {recent_work}"
+
+    prompt = f"""{PHD_SYSTEM_PROMPT}
+
+Write a cold research collaboration email to {first_name} ({name}), a PhD student at {university}.
+
+Their research:
+{research_context}
+
+About Francis (use only what's relevant to their research):
+{ABOUT_ME}
+
+{PHD_HUMANIZER_RULES}
+
+Output ONLY the email — subject line first (no "Subject:" prefix), then a blank line, then the body. Nothing else."""
+
+    try:
+        raw = _call_claude(prompt)
+        if not raw:
+            logger.error(f"Empty response for PhD email to {name}")
+            return None
+        return _parse_email(raw)
+    except Exception as e:
+        logger.error(f"Claude call failed for PhD email to {name}: {e}")
+        return None
+
+
 def _parse_email(raw: str) -> tuple[str, str] | None:
     """Split raw output into (subject, body)."""
     lines = raw.strip().splitlines()

@@ -3,8 +3,9 @@ import os
 from datetime import date, datetime
 
 BASE_DIR = os.path.dirname(__file__)
-TRACKER_PATH = os.path.join(BASE_DIR, "outreach_tracker.json")
-SENT_LOG_PATH = os.path.join(BASE_DIR, "sent_companies.json")
+TRACKER_PATH     = os.path.join(BASE_DIR, "outreach_tracker.json")
+SENT_LOG_PATH    = os.path.join(BASE_DIR, "sent_companies.json")
+PHD_TRACKER_PATH = os.path.join(BASE_DIR, "phd_tracker.json")
 
 
 # ---------------------------------------------------------------------------
@@ -112,5 +113,58 @@ def print_summary() -> None:
     print(f"{'='*60}\n")
 
 
+# ---------------------------------------------------------------------------
+# PhD tracker
+# ---------------------------------------------------------------------------
+
+def load_phd_tracker() -> list[dict]:
+    if not os.path.exists(PHD_TRACKER_PATH):
+        return []
+    with open(PHD_TRACKER_PATH, "r") as f:
+        return json.load(f)
+
+
+def get_contacted_phd_emails() -> set[str]:
+    return {entry["email"].lower() for entry in load_phd_tracker()}
+
+
+def add_phd_entry(
+    name: str,
+    email: str,
+    university: str,
+    research_area: str,
+    subject: str,
+    status: str = "sent",
+) -> None:
+    tracker = load_phd_tracker()
+    tracker.append(
+        {
+            "name": name,
+            "email": email,
+            "university": university,
+            "research_area": research_area,
+            "date_sent": date.today().isoformat(),
+            "subject": subject,
+            "status": status,
+        }
+    )
+    with open(PHD_TRACKER_PATH, "w") as f:
+        json.dump(tracker, f, indent=2)
+
+
+def print_phd_summary() -> None:
+    tracker = load_phd_tracker()
+    if not tracker:
+        print("No PhD outreach yet.")
+        return
+    print(f"\n{'='*70}")
+    print(f"PhD outreach emails sent: {len(tracker)}")
+    print(f"{'='*70}")
+    for i, e in enumerate(tracker, 1):
+        print(f"{i:>3}. [{e['date_sent']}] {e['name']:25} {e['university']:20} -> {e['email']}")
+    print(f"{'='*70}\n")
+
+
 if __name__ == "__main__":
     print_summary()
+    print_phd_summary()

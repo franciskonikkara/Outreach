@@ -641,6 +641,49 @@ def _guess_name_from_email(email: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Email verification — Hunter.io verifier
+# ---------------------------------------------------------------------------
+
+def verify_email(email: str) -> bool:
+    """
+    Verify an email address using Hunter.io's email-verifier endpoint.
+    Returns True if the email is deliverable, False if definitely invalid.
+    Falls back to True (assume valid) if no API key or rate-limited.
+
+    Statuses:
+      valid       → deliverable, return True
+      invalid     → undeliverable, return False
+      accept_all  → server accepts all mail (can't verify), return True
+      webmail     → gmail/yahoo etc, return True
+      unknown     → could not determine, return True (optimistic)
+    """
+    hunter_key = os.getenv("HUNTER_API_KEY", "")
+    if not hunter_key:
+        return True  # Can't verify without key — optimistic
+
+    url = "https://api.hunter.io/v2/email-verifier"
+    params = {"email": email, "api_key": hunter_key}
+    try:
+        resp = requests.get(url, params=params, timeout=10)
+        resp.raise_for_status()
+        data = resp.json().get("data", {})
+        status = data.get("status", "unknown")
+        if status == "invalid":
+            logger.warning(f"Hunter verified {email} as INVALID — skipping.")
+            return False
+        logger.debug(f"Hunter email verify: {email} → {status}")
+        return True
+    except requests.HTTPError as e:
+        code = e.response.status_code if e.response is not None else 0
+        if code == 429:
+            logger.debug("Hunter verifier: rate limit hit, skipping verification.")
+        return True  # Optimistic fallback
+    except Exception as e:
+        logger.debug(f"Hunter email verify error for {email}: {e}")
+        return True  # Optimistic fallback
+
+
+# ---------------------------------------------------------------------------
 # CLI — python contact_finder.py
 # ---------------------------------------------------------------------------
 
