@@ -1,15 +1,20 @@
 from __future__ import annotations
 
+import json
 import logging
 import os
 import re
 import time
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
 from ddgs import DDGS
 
 logger = logging.getLogger(__name__)
+
+BASE_DIR = os.path.dirname(__file__)
+CONTACTS_LOG = os.path.join(BASE_DIR, "contacts_found.json")
 
 HEADERS = {
     "User-Agent": (
@@ -19,7 +24,7 @@ HEADERS = {
     )
 }
 
-# Security-relevant titles (used by both Apollo and fallback name search)
+# Security-relevant titles searched by Apollo and DDG fallbacks
 SECURITY_TITLES = [
     "Head of Security",
     "CISO",
@@ -37,16 +42,58 @@ SECURITY_TITLES = [
     "Incident Response",
 ]
 
-# Generic inboxes — fallback only, tried last
-TEAM_INBOXES = ["security", "appsec", "careers", "jobs", "recruiting", "hiring"]
-
-# Email locals that are NOT personal addresses
+# Email locals that are NOT personal — never returned as a contact
 GENERIC_LOCALS = {
     "noreply", "no-reply", "donotreply", "info", "contact", "support",
     "hello", "team", "press", "media", "legal", "privacy", "abuse",
     "security", "appsec", "careers", "jobs", "recruiting", "hiring",
     "sales", "marketing", "billing", "accounts", "admin", "webmaster",
+    "enquiries", "enquiry", "helpdesk", "hr", "office", "operations",
 }
+
+
+# ---------------------------------------------------------------------------
+# Domain validation
+# ---------------------------------------------------------------------------
+
+def _is_company_domain(company_name: str, domain: str) -> bool:
+    """
+    Returns True if `domain` plausibly belongs to `company_name`.
+
+    Strategy (any one match → accept):
+      1. A meaningful slug of the company name appears inside the domain
+         e.g. "Trail of Bits"  → slug "trailofbits"  → found in "trailofbits.com"  ✓
+              "Wiz"            → slug "wiz"           → found in "wiz.io"            ✓
+              "Armis"          → slug "armis"         → NOT in "army.mil"            ✗
+      2. Every individual word in the company name (3+ chars) appears somewhere
+         in the domain  (handles abbrev / rebrands like "CrowdStrike" → "crowdstrike")
+      3. The first 4+ chars of the slug appear at the start of the domain label
+         (handles "Fortinet" → slug "fortinet" in "fortinet.net")
+    """
+    # Normalise both sides to lowercase alphanumeric
+    def _alphanum(s: str) -> str:
+        return re.sub(r"[^a-z0-9]", "", s.lower())
+
+    slug = _alphanum(company_name)          # "trailofbits", "wiz", "armis"
+    domain_clean = _alphanum(domain)        # "trailofbitscom", "wizio", "armymil"
+    domain_label = domain.split(".")[0].lower()   # "trailofbits", "wiz", "army"
+
+    # Rule 1: full slug in domain
+    if len(slug) >= 3 and slug in domain_clean:
+        return True
+
+    # Rule 2: every meaningful word in company name is in the domain
+    words = [w for w in re.findall(r"[a-z]{3,}", company_name.lower()) if w not in
+             {"the", "and", "for", "inc", "llc", "ltd", "corp", "security",
+              "cyber", "tech", "labs", "lab", "group", "systems", "solutions"}]
+    if words and all(_alphanum(w) in domain_clean for w in words):
+        return True
+
+    # Rule 3: first 4 chars of slug match start of domain label
+    if len(slug) >= 4 and domain_label.startswith(slug[:4]):
+        return True
+
+    return False
 
 
 # ---------------------------------------------------------------------------
@@ -55,38 +102,53 @@ GENERIC_LOCALS = {
 
 def find_contact(company_name: str, domain: str) -> tuple[str, str]:
     """
-    Returns (email, contact_name).
+    Returns (email, display_name) for a REAL named person at this company.
+    Returns ("", "") if no real person can be found — never returns a generic
+    inbox like security@ or careers@.
+
     Priority chain:
-      1. Hunter.io domain search  (HUNTER_API_KEY)
-      2. Apollo.io people search  (APOLLO_API_KEY)
-      3. Hunter.io email-finder   (uses Apollo name + Hunter key)
-      4. GitHub / blog / DDG mining
+      1. Hunter.io domain search       (HUNTER_API_KEY env var)
+      2. Apollo.io people search       (APOLLO_API_KEY env var)
+      3. Hunter.io email-finder        (Apollo name × Hunter verification)
+      4. GitHub / team page / DDG web mining
       5. Named person + inferred email pattern
-      6. Contact / team page scrape
-      7. Generic team inbox fallback
+      6. Contact page scrape (personal emails only)
     """
     if not domain:
-        return "", "unknown"
+        return "", ""
+
+    # Hard gate: reject the domain if it doesn't plausibly belong to the company.
+    # This prevents wrong-domain bugs (e.g. "Armis" resolving to army.mil).
+    if not _is_company_domain(company_name, domain):
+        logger.warning(
+            f"Domain '{domain}' doesn't look like it belongs to '{company_name}' — "
+            "skipping to avoid emailing the wrong organisation."
+        )
+        return "", ""
 
     hunter_key = os.getenv("HUNTER_API_KEY", "")
     apollo_key = os.getenv("APOLLO_API_KEY", "")
 
-    # ── 1. Hunter.io domain search ──────────────────────────────────────────
+    # ── 1. Hunter.io domain search ───────────────────────────────────────────
     if hunter_key:
-        email, name = _hunter_domain_search(domain, hunter_key)
+        email, name, position = _hunter_domain_search(domain, hunter_key)
         if email:
-            logger.info(f"Hunter.io found: {name} <{email}>")
-            return email, name
+            logger.info(f"[Hunter domain] {name} ({position}) <{email}>")
+            _save_contact(company_name, domain, email, name, position, "hunter.io")
+            return email, f"{name} ({position})" if position else name
 
-    # ── 2. Apollo.io people search ──────────────────────────────────────────
+    # ── 2. Apollo.io people search ───────────────────────────────────────────
     apollo_person: dict = {}
     if apollo_key:
-        email, name, apollo_person = _apollo_people_search(company_name, domain, apollo_key)
+        email, name, position, apollo_person = _apollo_people_search(
+            company_name, domain, apollo_key
+        )
         if email:
-            logger.info(f"Apollo.io found: {name} <{email}>")
-            return email, name
+            logger.info(f"[Apollo] {name} ({position}) <{email}>")
+            _save_contact(company_name, domain, email, name, position, "apollo.io")
+            return email, f"{name} ({position})" if position else name
 
-    # ── 3. Hunter.io email-finder (cross Apollo name × Hunter pattern) ──────
+    # ── 3. Hunter email-finder (Apollo name × Hunter key) ────────────────────
     if hunter_key and apollo_person.get("first_name") and apollo_person.get("last_name"):
         email, name = _hunter_email_finder(
             domain,
@@ -95,14 +157,17 @@ def find_contact(company_name: str, domain: str) -> tuple[str, str]:
             hunter_key,
         )
         if email:
-            logger.info(f"Hunter email-finder found: {name} <{email}>")
-            return email, name
+            position = apollo_person.get("title", "")
+            logger.info(f"[Hunter finder] {name} ({position}) <{email}>")
+            _save_contact(company_name, domain, email, name, position, "hunter.io (email-finder)")
+            return email, f"{name} ({position})" if position else name
 
-    # ── 4. GitHub / blog / DDG mining ───────────────────────────────────────
-    email, name = _find_real_employee_email(company_name, domain)
+    # ── 4. GitHub / team page / DDG web mining ───────────────────────────────
+    email, name, position = _find_real_employee_email(company_name, domain)
     if email:
-        logger.info(f"Web mining found: {name} <{email}>")
-        return email, name
+        logger.info(f"[Web mining] {name} ({position}) <{email}>")
+        _save_contact(company_name, domain, email, name, position, "web mining")
+        return email, f"{name} ({position})" if position else name
 
     # ── 5. Named person + inferred email pattern ─────────────────────────────
     person_name, title = _find_named_person(company_name)
@@ -111,78 +176,128 @@ def find_contact(company_name: str, domain: str) -> tuple[str, str]:
         if pattern:
             email = _apply_pattern(person_name, pattern, domain)
             if email:
-                return email, f"{person_name} ({title or 'inferred'})"
+                logger.info(f"[Pattern] {person_name} ({title}) <{email}> (inferred)")
+                _save_contact(company_name, domain, email, person_name, title, "pattern inference")
+                return email, f"{person_name} ({title})" if title else person_name
 
-    # ── 6. Contact / team page scrape ────────────────────────────────────────
-    scraped = _scrape_contact_page(domain)
-    if scraped:
-        return scraped, "contact page"
+    # ── 6. Contact/team page — personal emails only ──────────────────────────
+    email, name = _scrape_contact_page_personal(domain)
+    if email:
+        logger.info(f"[Page scrape] {name} <{email}>")
+        _save_contact(company_name, domain, email, name, "", "page scrape")
+        return email, name
 
-    # ── 7. Generic team inbox fallback ───────────────────────────────────────
-    for inbox in TEAM_INBOXES:
-        return f"{inbox}@{domain}", f"{inbox} team inbox"
+    # No real person found — skip this company
+    logger.warning(f"No named contact found for {company_name} ({domain}) — skipping.")
+    return "", ""
 
-    return "", "unknown"
+
+# ---------------------------------------------------------------------------
+# Contacts log
+# ---------------------------------------------------------------------------
+
+def _save_contact(
+    company: str,
+    domain: str,
+    email: str,
+    name: str,
+    position: str,
+    source: str,
+) -> None:
+    """
+    Append the contact to contacts_found.json.
+    Deduplicates by email — won't add the same address twice.
+    """
+    if os.path.exists(CONTACTS_LOG):
+        with open(CONTACTS_LOG, "r", encoding="utf-8") as f:
+            contacts: list[dict] = json.load(f)
+    else:
+        contacts = []
+
+    # Skip if already logged
+    existing_emails = {c["email"].lower() for c in contacts}
+    if email.lower() in existing_emails:
+        return
+
+    contacts.append(
+        {
+            "name": name,
+            "position": position or "—",
+            "company": company,
+            "email": email,
+            "domain": domain,
+            "source": source,
+            "found_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        }
+    )
+
+    with open(CONTACTS_LOG, "w", encoding="utf-8") as f:
+        json.dump(contacts, f, indent=2)
+
+
+def load_contacts() -> list[dict]:
+    """Return all entries from contacts_found.json."""
+    if not os.path.exists(CONTACTS_LOG):
+        return []
+    with open(CONTACTS_LOG, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 # ---------------------------------------------------------------------------
 # Strategy 1 — Hunter.io domain search
 # ---------------------------------------------------------------------------
 
-def _hunter_domain_search(domain: str, api_key: str) -> tuple[str, str]:
+def _hunter_domain_search(domain: str, api_key: str) -> tuple[str, str, str]:
     """
-    GET /v2/domain-search — returns all emails Hunter knows for the domain.
-    Picks the most relevant security person; falls back to any personal email.
-    Docs: https://hunter.io/api-documentation/v2#domain-search
+    GET /v2/domain-search — returns verified emails Hunter knows for the domain.
+    Returns (email, full_name, position). Skips all generic locals.
     """
     url = "https://api.hunter.io/v2/domain-search"
-    params = {
-        "domain": domain,
-        "api_key": api_key,
-        "limit": 10,
-        "type": "personal",
-    }
+    params = {"domain": domain, "api_key": api_key, "limit": 10, "type": "personal"}
     try:
         resp = requests.get(url, params=params, timeout=10)
         resp.raise_for_status()
-        data = resp.json().get("data", {})
-        emails = data.get("emails", [])
+        emails = resp.json().get("data", {}).get("emails", [])
 
-        if not emails:
-            logger.debug(f"Hunter domain search: no emails found for {domain}")
-            return "", ""
+        # Filter to real personal addresses only
+        personal = [
+            e for e in emails
+            if e.get("value") and e["value"].split("@")[0].lower() not in GENERIC_LOCALS
+        ]
+        if not personal:
+            return "", "", ""
 
-        # Score each result: prefer security-relevant titles, higher confidence
-        def _score(entry: dict) -> int:
-            title = (entry.get("position") or "").lower()
-            score = entry.get("confidence", 0)
-            security_kw = ["security", "ciso", "appsec", "pentest", "red team",
-                           "threat", "forensic", "soc", "devsecops", "infosec"]
-            if any(kw in title for kw in security_kw):
-                score += 50
-            return score
+        # Score: security-relevant title → higher
+        def _score(e: dict) -> int:
+            title = (e.get("position") or "").lower()
+            s = e.get("confidence", 0)
+            if any(kw in title for kw in [
+                "security", "ciso", "appsec", "pentest", "red team",
+                "threat", "forensic", "soc", "devsecops", "infosec", "engineer",
+            ]):
+                s += 50
+            return s
 
-        emails.sort(key=_score, reverse=True)
-        best = emails[0]
-        email = best.get("value", "")
+        personal.sort(key=_score, reverse=True)
+        best = personal[0]
+        email = best["value"]
         first = best.get("first_name", "")
         last = best.get("last_name", "")
-        position = best.get("position", "")
         full_name = f"{first} {last}".strip() or _guess_name_from_email(email)
-        display = f"{full_name} ({position})" if position else full_name
-        return email, display
+        position = best.get("position", "")
+        return email, full_name, position
 
     except requests.HTTPError as e:
-        if e.response is not None and e.response.status_code == 401:
-            logger.warning("Hunter.io: invalid API key (401). Check HUNTER_API_KEY.")
-        elif e.response is not None and e.response.status_code == 429:
-            logger.warning("Hunter.io: rate limit hit (429). Will retry next run.")
+        code = e.response.status_code if e.response is not None else "?"
+        if code == 401:
+            logger.warning("Hunter.io: invalid API key (401).")
+        elif code == 429:
+            logger.warning("Hunter.io: rate limit (429).")
         else:
-            logger.warning(f"Hunter.io domain search failed for {domain}: {e}")
+            logger.warning(f"Hunter domain search failed for {domain}: {e}")
     except Exception as e:
-        logger.warning(f"Hunter.io domain search error for {domain}: {e}")
-
-    return "", ""
+        logger.warning(f"Hunter domain search error for {domain}: {e}")
+    return "", "", ""
 
 
 # ---------------------------------------------------------------------------
@@ -191,12 +306,11 @@ def _hunter_domain_search(domain: str, api_key: str) -> tuple[str, str]:
 
 def _apollo_people_search(
     company_name: str, domain: str, api_key: str
-) -> tuple[str, str, dict]:
+) -> tuple[str, str, str, dict]:
     """
-    POST /v1/mixed_people/search — search for security people at the company.
-    Returns (email, display_name, person_dict).
-    person_dict has first_name/last_name for cross-use with Hunter email-finder.
-    Docs: https://apolloio.github.io/apollo-api-docs/#people-search
+    POST /v1/mixed_people/search — find security people at the company.
+    Returns (email, full_name, position, person_dict).
+    email is "" when Apollo has the person but the email is masked.
     """
     url = "https://api.apollo.io/v1/mixed_people/search"
     payload = {
@@ -212,13 +326,11 @@ def _apollo_people_search(
         people = resp.json().get("people", [])
 
         if not people:
-            logger.debug(f"Apollo: no people found for {domain}")
-            return "", "", {}
+            return "", "", "", {}
 
-        # Prefer people whose email is fully revealed (not masked)
         def _has_full_email(p: dict) -> bool:
-            email = p.get("email") or ""
-            return bool(email) and "***" not in email and "@" in email
+            e = p.get("email") or ""
+            return bool(e) and "***" not in e and "@" in e
 
         revealed = [p for p in people if _has_full_email(p)]
         candidate = revealed[0] if revealed else people[0]
@@ -226,44 +338,34 @@ def _apollo_people_search(
         first = candidate.get("first_name", "")
         last = candidate.get("last_name", "")
         title = candidate.get("title", "")
-        email = candidate.get("email", "")
+        email = candidate.get("email", "") if _has_full_email(candidate) else ""
         full_name = f"{first} {last}".strip()
-        display = f"{full_name} ({title})" if title else full_name
 
-        if _has_full_email(candidate):
-            return email, display, candidate
-
-        # Email masked — return the person metadata for Hunter cross-lookup
-        logger.debug(
-            f"Apollo found {full_name} at {domain} but email is masked — "
-            "will try Hunter email-finder."
-        )
-        return "", display, candidate
+        return email, full_name, title, candidate
 
     except requests.HTTPError as e:
-        if e.response is not None and e.response.status_code == 401:
-            logger.warning("Apollo.io: invalid API key (401). Check APOLLO_API_KEY.")
-        elif e.response is not None and e.response.status_code == 429:
-            logger.warning("Apollo.io: rate limit hit (429). Will retry next run.")
+        code = e.response.status_code if e.response is not None else "?"
+        if code == 401:
+            logger.warning("Apollo.io: invalid API key (401).")
+        elif code == 429:
+            logger.warning("Apollo.io: rate limit (429).")
         else:
             logger.warning(f"Apollo people search failed for {domain}: {e}")
     except Exception as e:
         logger.warning(f"Apollo people search error for {domain}: {e}")
-
-    return "", "", {}
+    return "", "", "", {}
 
 
 # ---------------------------------------------------------------------------
-# Strategy 3 — Hunter.io email-finder (name × domain)
+# Strategy 3 — Hunter.io email-finder
 # ---------------------------------------------------------------------------
 
 def _hunter_email_finder(
     domain: str, first_name: str, last_name: str, api_key: str
 ) -> tuple[str, str]:
     """
-    GET /v2/email-finder — given a person's name and domain, Hunter guesses
-    and verifies the email address.
-    Docs: https://hunter.io/api-documentation/v2#email-finder
+    GET /v2/email-finder — construct + verify an email given name + domain.
+    Only returns if Hunter confidence >= 30.
     """
     url = "https://api.hunter.io/v2/email-finder"
     params = {
@@ -278,22 +380,18 @@ def _hunter_email_finder(
         data = resp.json().get("data", {})
         email = data.get("email", "")
         score = data.get("score", 0)
-        if email and score >= 30:          # Hunter confidence score 0-100
-            full_name = f"{first_name} {last_name}".strip()
-            return email, full_name
-        elif email:
-            logger.debug(
-                f"Hunter email-finder returned {email} for {first_name} {last_name} "
-                f"but confidence too low ({score}), skipping."
-            )
+        local = email.split("@")[0].lower() if email else ""
+        if email and local not in GENERIC_LOCALS and score >= 30:
+            return email, f"{first_name} {last_name}".strip()
+        if email and score < 30:
+            logger.debug(f"Hunter email-finder: {email} confidence {score} too low, skipping.")
     except requests.HTTPError as e:
         if e.response is not None and e.response.status_code == 404:
-            logger.debug(f"Hunter email-finder: no result for {first_name} {last_name} @{domain}")
+            logger.debug(f"Hunter email-finder: no result for {first_name} {last_name}@{domain}")
         else:
             logger.warning(f"Hunter email-finder failed: {e}")
     except Exception as e:
         logger.warning(f"Hunter email-finder error: {e}")
-
     return "", ""
 
 
@@ -301,25 +399,25 @@ def _hunter_email_finder(
 # Strategy 4 — web mining (GitHub, team pages, DDG)
 # ---------------------------------------------------------------------------
 
-def _find_real_employee_email(company_name: str, domain: str) -> tuple[str, str]:
-    """Tries several public-web approaches to find a real @domain email."""
+def _find_real_employee_email(company_name: str, domain: str) -> tuple[str, str, str]:
+    """Returns (email, name, position) from public web sources."""
     email, name = _search_github_commits(domain)
     if email:
-        return email, name
+        return email, name, "GitHub"
 
     email, name = _scrape_team_page(domain)
     if email:
-        return email, name
+        return email, name, "team page"
 
     email, name = _search_blog_authors(company_name, domain)
     if email:
-        return email, name
+        return email, name, "blog"
 
     email, name = _ddg_email_search(company_name, domain)
     if email:
-        return email, name
+        return email, name, "web search"
 
-    return "", ""
+    return "", "", ""
 
 
 def _search_github_commits(domain: str) -> tuple[str, str]:
@@ -335,7 +433,7 @@ def _search_github_commits(domain: str) -> tuple[str, str]:
                     return emails[0], _guess_name_from_email(emails[0])
             time.sleep(0.3)
         except Exception as e:
-            logger.debug(f"GitHub email search failed for {domain}: {e}")
+            logger.debug(f"GitHub search failed for {domain}: {e}")
     return "", ""
 
 
@@ -412,7 +510,7 @@ def _find_named_person(company_name: str) -> tuple[str, str]:
             with DDGS() as ddgs:
                 results = list(ddgs.text(f'"{company_name}" "{role}"', max_results=4))
             for r in results:
-                name = _extract_person_name(r.get("title", ""), r.get("body", ""), role)
+                name = _extract_person_name(r.get("title", ""), r.get("body", ""))
                 if name:
                     return name, role
             time.sleep(0.25)
@@ -422,7 +520,7 @@ def _find_named_person(company_name: str) -> tuple[str, str]:
         with DDGS() as ddgs:
             results = list(ddgs.text(f'"{company_name}" security contact email', max_results=3))
         for r in results:
-            name = _extract_person_name(r.get("title", ""), r.get("body", ""), "")
+            name = _extract_person_name(r.get("title", ""), r.get("body", ""))
             if name:
                 return name, ""
     except Exception:
@@ -430,7 +528,7 @@ def _find_named_person(company_name: str) -> tuple[str, str]:
     return "", ""
 
 
-def _extract_person_name(title: str, body: str, role: str) -> str:
+def _extract_person_name(title: str, body: str) -> str:
     patterns = [
         r"([A-Z][a-z]+ [A-Z][a-z]+)\s*[-–|]\s*(?:Head|CISO|VP|Director|Manager|Engineer|Recruiter)",
         r"([A-Z][a-z]+ [A-Z][a-z]+),?\s+(?:Head|CISO|VP|Director|Manager|Engineer)",
@@ -491,10 +589,11 @@ def _apply_pattern(full_name: str, pattern: str, domain: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Strategy 6 — contact page scrape
+# Strategy 6 — contact page scrape (personal emails only)
 # ---------------------------------------------------------------------------
 
-def _scrape_contact_page(domain: str) -> str:
+def _scrape_contact_page_personal(domain: str) -> tuple[str, str]:
+    """Scrape contact/about pages but return ONLY personal-looking emails."""
     for path in ["/contact", "/about", "/contact-us", "/team", "/people"]:
         url = f"https://{domain}{path}"
         try:
@@ -504,17 +603,11 @@ def _scrape_contact_page(domain: str) -> str:
                 text = soup.get_text(separator=" ", strip=True)
                 personal = _extract_personal_emails(text, domain)
                 if personal:
-                    return personal[0]
-                for email in re.findall(
-                    r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}", text
-                ):
-                    local = email.split("@")[0].lower()
-                    if local not in {"noreply", "no-reply", "donotreply"}:
-                        return email
+                    return personal[0], _guess_name_from_email(personal[0])
         except Exception:
             pass
         time.sleep(0.2)
-    return ""
+    return "", ""
 
 
 # ---------------------------------------------------------------------------
@@ -522,12 +615,13 @@ def _scrape_contact_page(domain: str) -> str:
 # ---------------------------------------------------------------------------
 
 def _extract_personal_emails(text: str, domain: str) -> list[str]:
-    """Extract @domain emails that look like real person addresses."""
+    """Extract @domain emails that look like a real person (not a generic inbox)."""
     personal = []
     for email in re.findall(r"[a-zA-Z][a-zA-Z0-9._%+\-]{1,40}@" + re.escape(domain), text):
         local = email.split("@")[0].lower()
         if local in GENERIC_LOCALS:
             continue
+        # Must match a name-like pattern: at least two letter groups
         if re.match(r"^[a-z]{2,}[.\-_]?[a-z]{2,}", local):
             personal.append(email)
     return personal
@@ -538,3 +632,24 @@ def _guess_name_from_email(email: str) -> str:
     local = email.split("@")[0]
     parts = [p.capitalize() for p in re.split(r"[.\-_]", local) if len(p) > 1]
     return " ".join(parts) if len(parts) >= 2 else local.capitalize()
+
+
+# ---------------------------------------------------------------------------
+# CLI — python contact_finder.py
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    contacts = load_contacts()
+    if not contacts:
+        print("No contacts found yet.")
+    else:
+        print(f"\n{'='*75}")
+        print(f"  {'NAME':<22} {'POSITION':<28} {'COMPANY':<20} {'EMAIL'}")
+        print(f"{'='*75}")
+        for c in contacts:
+            print(
+                f"  {c['name']:<22} {c['position']:<28} {c['company']:<20} {c['email']}"
+            )
+        print(f"{'='*75}")
+        print(f"  Total contacts: {len(contacts)}")
+        print(f"{'='*75}\n")
