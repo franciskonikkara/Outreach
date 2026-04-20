@@ -6,6 +6,9 @@ on:
     - cron: "0 14 * * 1-5"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   send-emails:
     runs-on: ubuntu-latest
@@ -14,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
