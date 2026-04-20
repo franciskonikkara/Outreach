@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Trent Brunson",
+    "position": "Principal Security Engineer",
+    "company": "Trail of Bits",
+    "email": "trent.brunson@trailofbits.com",
+    "domain": "trailofbits.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-19 21:28"
+  },
+  {
+    "name": "Steve Kreger",
+    "position": "Director of Engineering",
+    "company": "CrowdStrike",
+    "email": "steve.kreger@crowdstrike.com",
+    "domain": "crowdstrike.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-19 21:28"
+  }
+]

@@ -313,15 +313,16 @@ def _apollo_people_search(
     email is "" when Apollo has the person but the email is masked.
     """
     url = "https://api.apollo.io/v1/mixed_people/search"
+    # Apollo now requires the key in the X-Api-Key header (not the body)
+    headers = {"X-Api-Key": api_key, "Content-Type": "application/json"}
     payload = {
-        "api_key": api_key,
         "q_organization_domains": domain,
         "person_titles": SECURITY_TITLES,
         "page": 1,
         "per_page": 5,
     }
     try:
-        resp = requests.post(url, json=payload, timeout=12)
+        resp = requests.post(url, json=payload, headers=headers, timeout=12)
         resp.raise_for_status()
         people = resp.json().get("people", [])
 
@@ -346,7 +347,12 @@ def _apollo_people_search(
     except requests.HTTPError as e:
         code = e.response.status_code if e.response is not None else "?"
         if code == 401:
-            logger.warning("Apollo.io: invalid API key (401).")
+            logger.warning("Apollo.io: invalid API key (401). Check APOLLO_API_KEY.")
+        elif code == 403:
+            logger.debug(
+                "Apollo.io: people search requires a paid plan — skipping Apollo. "
+                "Hunter.io will be used instead."
+            )
         elif code == 429:
             logger.warning("Apollo.io: rate limit (429).")
         else:

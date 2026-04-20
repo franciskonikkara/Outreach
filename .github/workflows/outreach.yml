@@ -29,14 +29,6 @@ jobs:
           GMAIL_TOKEN_B64: ${{ secrets.GMAIL_TOKEN_B64 }}
         run: echo "$GMAIL_TOKEN_B64" | base64 --decode > token.json
 
-      - name: Write resume PDF
-        env:
-          RESUME_PDF_B64: ${{ secrets.RESUME_PDF_B64 }}
-        run: |
-          mkdir -p resume
-          echo "$RESUME_PDF_B64" | base64 --decode > resume/Francis_Konikkara_Resume.pdf
-        continue-on-error: true
-
       - name: Run outreach
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
