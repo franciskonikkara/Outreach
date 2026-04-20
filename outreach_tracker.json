@@ -150,5 +150,69 @@
     "date_sent": "2026-04-20",
     "subject": "Redbot's manual senior-led approach to pen testing",
     "status": "sent"
+  },
+  {
+    "company": "Google",
+    "contact_email": "allisonpatz@google.com",
+    "contact_name": "Allison Patz (Director of Industry)",
+    "date_sent": "2026-04-20",
+    "subject": "Google's data center security operations \u2014 managing dozens of global facilities with security embedded in the infrastructure itself \u2014 is exactly the kind of scale problem I want to work on.",
+    "status": "sent"
+  },
+  {
+    "company": "Splunk",
+    "contact_email": "pszekely@splunk.com",
+    "contact_name": "Pascal Szekely (Director of Engineering)",
+    "date_sent": "2026-04-20",
+    "subject": "Splunk's latest threat intel on npm supply chain attacks \u2014 exactly what enterprises need to catch in real time",
+    "status": "sent"
+  },
+  {
+    "company": "Abnormal Security",
+    "contact_email": "grace.kuo@abnormal.ai",
+    "contact_name": "Grace Kuo (Customer Success Manager)",
+    "date_sent": "2026-04-20",
+    "subject": "Abnormal's behavioral AI approach to email security",
+    "status": "sent"
+  },
+  {
+    "company": "Snyk",
+    "contact_email": "said.syed@snyk.io",
+    "contact_name": "Said Syed (CISO)",
+    "date_sent": "2026-04-20",
+    "subject": "Snyk's Agent Security platform makes sense \u2014 autonomous AI agents are shipping code faster than humans can audit it",
+    "status": "sent"
+  },
+  {
+    "company": "Analyst1",
+    "contact_email": "anastasia.sentsova@analyst1.com",
+    "contact_name": "Anastasia Sentsova (Senior Threat Intelligence Analyst)",
+    "date_sent": "2026-04-20",
+    "subject": "Analyst1's work on the PowMix botnet campaign caught my attention, especially the detection angle on previously undocumented malware.",
+    "status": "sent"
+  },
+  {
+    "company": "Intel",
+    "contact_email": "pradeep.mishra@intel.com",
+    "contact_name": "Pradeep Mishra (Engineering Director)",
+    "date_sent": "2026-04-20",
+    "subject": "Intel Platform Security Report 2026 \u2014 Internship Interest",
+    "status": "sent"
+  },
+  {
+    "company": "PwC",
+    "contact_email": "sean.page@pwc.com",
+    "contact_name": "Sean Page (Director of Cybersecurity)",
+    "date_sent": "2026-04-20",
+    "subject": "PwC's AI security work \u2014 summer 2026 internship",
+    "status": "sent"
+  },
+  {
+    "company": "HiddenLayer",
+    "contact_email": "eoin@hiddenlayer.com",
+    "contact_name": "Eoin Wickens (Director of Threat Intelligence)",
+    "date_sent": "2026-04-20",
+    "subject": "AI Supply Chain Security \u2014 Summer 2026",
+    "status": "sent"
   }
 ]

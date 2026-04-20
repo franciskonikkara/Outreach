@@ -79,5 +79,77 @@
     "domain": "redbotsecurity.com",
     "source": "hunter.io",
     "found_at": "2026-04-20 14:53"
+  },
+  {
+    "name": "Allison Patz",
+    "position": "Director of Industry",
+    "company": "Google",
+    "email": "allisonpatz@google.com",
+    "domain": "google.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:21"
+  },
+  {
+    "name": "Pascal Szekely",
+    "position": "Director of Engineering",
+    "company": "Splunk",
+    "email": "pszekely@splunk.com",
+    "domain": "splunk.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:22"
+  },
+  {
+    "name": "Grace Kuo",
+    "position": "Customer Success Manager",
+    "company": "Abnormal Security",
+    "email": "grace.kuo@abnormal.ai",
+    "domain": "abnormal.ai",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:22"
+  },
+  {
+    "name": "Said Syed",
+    "position": "CISO",
+    "company": "Snyk",
+    "email": "said.syed@snyk.io",
+    "domain": "snyk.io",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:22"
+  },
+  {
+    "name": "Anastasia Sentsova",
+    "position": "Senior Threat Intelligence Analyst",
+    "company": "Analyst1",
+    "email": "anastasia.sentsova@analyst1.com",
+    "domain": "analyst1.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:22"
+  },
+  {
+    "name": "Pradeep Mishra",
+    "position": "Engineering Director",
+    "company": "Intel",
+    "email": "pradeep.mishra@intel.com",
+    "domain": "intel.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:22"
+  },
+  {
+    "name": "Sean Page",
+    "position": "Director of Cybersecurity",
+    "company": "PwC",
+    "email": "sean.page@pwc.com",
+    "domain": "pwc.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:23"
+  },
+  {
+    "name": "Eoin Wickens",
+    "position": "Director of Threat Intelligence",
+    "company": "HiddenLayer",
+    "email": "eoin@hiddenlayer.com",
+    "domain": "hiddenlayer.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-20 15:23"
   }
 ]

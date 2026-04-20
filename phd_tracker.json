@@ -7,5 +7,23 @@
     "date_sent": "2026-04-20",
     "subject": "Digital Forensics Collaboration: Memory Analysis and Automation",
     "status": "sent"
+  },
+  {
+    "name": "Nicole Meng",
+    "email": "ziyi.meng@tufts.edu",
+    "university": "Tufts University",
+    "research_area": "robust AI, machine learning, and security",
+    "date_sent": "2026-04-20",
+    "subject": "Robust Adversarial Defenses in ML Systems",
+    "status": "sent"
+  },
+  {
+    "name": "Bo Hui",
+    "email": "bo.hui@jhu.edu",
+    "university": "Johns Hopkins University",
+    "research_area": "information security",
+    "date_sent": "2026-04-20",
+    "subject": "Information Security and Detection Engineering",
+    "status": "sent"
   }
 ]
