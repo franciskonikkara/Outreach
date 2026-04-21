@@ -208,5 +208,54 @@
     "contact_name": "Mohamed Ibrahim (Vice President of Sales Engineering)",
     "subject": "Exabeam's AI agents for threat detection and response",
     "sent_at": "2026-04-21 14:49"
+  },
+  {
+    "company": "KPMG",
+    "contact_email": "sbobade@kpmg.com",
+    "contact_name": "Sanjeev Bobade (Associate Director)",
+    "subject": "AI Security at KPMG \u2014 Summer 2026",
+    "sent_at": "2026-04-21 15:19"
+  },
+  {
+    "company": "Bishop Fox",
+    "contact_email": "jprososki@bishopfox.com",
+    "contact_name": "Joseph Prososki (Director of Strategy)",
+    "subject": "Bishop Fox's first place finishes at HackMex and EkoParty show your team knows how to exploit real infrastructure under pressure.",
+    "sent_at": "2026-04-21 15:20"
+  },
+  {
+    "company": "Bloomberg",
+    "contact_email": "spermatasari@bloomberg.com",
+    "contact_name": "Soraya Permatasari (Executive Producer)",
+    "subject": "Bloomberg's coverage of the Kimwolf botnet and 2026 CMMC enforcement shows you're tracking real incident response and threat landscape shifts \u2014 that's exactly the work I want to be doing.",
+    "sent_at": "2026-04-21 15:20"
+  },
+  {
+    "company": "SentinelOne",
+    "contact_email": "ashish.vernekar@sentinelone.com",
+    "contact_name": "Ashish Vernekar (Partner Solutions Engineer Intern)",
+    "subject": "SentinelOne's autonomous response approach \u2014 stopping threats at machine speed",
+    "sent_at": "2026-04-21 15:20"
+  },
+  {
+    "company": "Ermetic",
+    "contact_email": "lang.simon@hermetic-pumpen.com",
+    "contact_name": "Simon Lang (Sales Director)",
+    "subject": "Ermetic's identity-first approach to cloud entitlements caught my attention, especially the CIEM angle on AWS, Azure, and GCP.",
+    "sent_at": "2026-04-21 15:20"
+  },
+  {
+    "company": "Legit Security",
+    "contact_email": "san@legitsecurity.com",
+    "contact_name": "San Moshe (Director of Engineering)",
+    "subject": "Security supply chain automation \u2014 summer 2026 internship",
+    "sent_at": "2026-04-21 15:21"
+  },
+  {
+    "company": "NVIDIA",
+    "contact_email": "psirt@nvidia.com",
+    "contact_name": "Psirt (GitHub)",
+    "subject": "Security-focused internship \u2014 DFIR and detection engineering background",
+    "sent_at": "2026-04-21 15:22"
   }
 ]

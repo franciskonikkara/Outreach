@@ -196,5 +196,68 @@
     "domain": "exabeam.com",
     "source": "hunter.io",
     "found_at": "2026-04-21 14:49"
+  },
+  {
+    "name": "Sanjeev Bobade",
+    "position": "Associate Director",
+    "company": "KPMG",
+    "email": "sbobade@kpmg.com",
+    "domain": "kpmg.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 15:19"
+  },
+  {
+    "name": "Joseph Prososki",
+    "position": "Director of Strategy",
+    "company": "Bishop Fox",
+    "email": "jprososki@bishopfox.com",
+    "domain": "bishopfox.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 15:19"
+  },
+  {
+    "name": "Soraya Permatasari",
+    "position": "Executive Producer",
+    "company": "Bloomberg",
+    "email": "spermatasari@bloomberg.com",
+    "domain": "bloomberg.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 15:20"
+  },
+  {
+    "name": "Ashish Vernekar",
+    "position": "Partner Solutions Engineer Intern",
+    "company": "SentinelOne",
+    "email": "ashish.vernekar@sentinelone.com",
+    "domain": "sentinelone.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 15:20"
+  },
+  {
+    "name": "Simon Lang",
+    "position": "Sales Director",
+    "company": "Ermetic",
+    "email": "lang.simon@hermetic-pumpen.com",
+    "domain": "hermetic-pumpen.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 15:20"
+  },
+  {
+    "name": "San Moshe",
+    "position": "Director of Engineering",
+    "company": "Legit Security",
+    "email": "san@legitsecurity.com",
+    "domain": "legitsecurity.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 15:21"
+  },
+  {
+    "name": "Psirt",
+    "position": "GitHub",
+    "company": "NVIDIA",
+    "email": "psirt@nvidia.com",
+    "domain": "nvidia.com",
+    "source": "web mining",
+    "found_at": "2026-04-21 15:21"
   }
 ]
