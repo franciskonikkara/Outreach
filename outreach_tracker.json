@@ -214,5 +214,45 @@
     "date_sent": "2026-04-20",
     "subject": "AI Supply Chain Security \u2014 Summer 2026",
     "status": "sent"
+  },
+  {
+    "company": "Drata",
+    "contact_email": "matthillary@drata.com",
+    "contact_name": "Matt Hillary (Chief Information Security Officer)",
+    "date_sent": "2026-04-21",
+    "subject": "Security internship \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Securonix",
+    "contact_email": "tjain@securonix.com",
+    "contact_name": "Tanuj Jain (Head of Quality Engineering)",
+    "date_sent": "2026-04-21",
+    "subject": "Securonix's Gartner Leader positioning in autonomous security operations",
+    "status": "sent"
+  },
+  {
+    "company": "Salesforce",
+    "contact_email": "egeballe@salesforce.com",
+    "contact_name": "Emily Geballe (Director of Software Engineering)",
+    "date_sent": "2026-04-21",
+    "subject": "Salesforce Security Team just posted on Experience Cloud guest user misconfigurations \u2014 overly permissive access is a real attack surface your team is actively defending.",
+    "status": "sent"
+  },
+  {
+    "company": "Wiz",
+    "contact_email": "dustin.gleich@wiz.io",
+    "contact_name": "Dustin Gleich (Senior Director, Solutions Engineering)",
+    "date_sent": "2026-04-21",
+    "subject": "Wiz's security graph approach to cloud risk \u2014 connecting code, cloud, and runtime for context-driven automation \u2014 is exactly what I've been building toward.",
+    "status": "sent"
+  },
+  {
+    "company": "Exabeam",
+    "contact_email": "mohamed@exabeam.com",
+    "contact_name": "Mohamed Ibrahim (Vice President of Sales Engineering)",
+    "date_sent": "2026-04-21",
+    "subject": "Exabeam's AI agents for threat detection and response",
+    "status": "sent"
   }
 ]

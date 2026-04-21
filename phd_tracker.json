@@ -25,5 +25,23 @@
     "date_sent": "2026-04-20",
     "subject": "Information Security and Detection Engineering",
     "status": "sent"
+  },
+  {
+    "name": "RJ Joyce",
+    "email": "joyce8@umbc.edu",
+    "university": "University of Maryland Baltimore County",
+    "research_area": "malware analysis and machine learning",
+    "date_sent": "2026-04-21",
+    "subject": "Malware Behavior Benchmarking and ML Feature Engineering",
+    "status": "sent"
+  },
+  {
+    "name": "Zao Yang",
+    "email": "zao.yang@utah.edu",
+    "university": "University of Utah",
+    "research_area": "fuzzing and binary analysis",
+    "date_sent": "2026-04-21",
+    "subject": "Fuzzing and Binary Analysis Collaboration",
+    "status": "sent"
   }
 ]

@@ -151,5 +151,50 @@
     "domain": "hiddenlayer.com",
     "source": "hunter.io",
     "found_at": "2026-04-20 15:23"
+  },
+  {
+    "name": "Matt Hillary",
+    "position": "Chief Information Security Officer",
+    "company": "Drata",
+    "email": "matthillary@drata.com",
+    "domain": "drata.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 14:47"
+  },
+  {
+    "name": "Tanuj Jain",
+    "position": "Head of Quality Engineering",
+    "company": "Securonix",
+    "email": "tjain@securonix.com",
+    "domain": "securonix.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 14:48"
+  },
+  {
+    "name": "Emily Geballe",
+    "position": "Director of Software Engineering",
+    "company": "Salesforce",
+    "email": "egeballe@salesforce.com",
+    "domain": "salesforce.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 14:48"
+  },
+  {
+    "name": "Dustin Gleich",
+    "position": "Senior Director, Solutions Engineering",
+    "company": "Wiz",
+    "email": "dustin.gleich@wiz.io",
+    "domain": "wiz.io",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 14:49"
+  },
+  {
+    "name": "Mohamed Ibrahim",
+    "position": "Vice President of Sales Engineering",
+    "company": "Exabeam",
+    "email": "mohamed@exabeam.com",
+    "domain": "exabeam.com",
+    "source": "hunter.io",
+    "found_at": "2026-04-21 14:49"
   }
 ]
