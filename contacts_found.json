@@ -304,5 +304,14 @@
     "domain": "aembit.io",
     "source": "web mining",
     "found_at": "2026-04-22 14:50"
+  },
+  {
+    "name": "Events",
+    "position": "blog",
+    "company": "Veza",
+    "email": "events@veza.com",
+    "domain": "veza.com",
+    "source": "web mining",
+    "found_at": "2026-04-22 15:20"
   }
 ]
