@@ -7,6 +7,10 @@ import anthropic
 
 logger = logging.getLogger(__name__)
 
+# ---------------------------------------------------------------------------
+# Francis's profile — source of truth for all emails
+# ---------------------------------------------------------------------------
+
 ABOUT_ME = """
 Name: Francis Anthony Konikkara
 Email: francisanthony0328@gmail.com
@@ -17,110 +21,232 @@ Status: F-1 visa, CPT-authorized for summer 2026 — no visa sponsorship needed
 Education: MEng Cybersecurity Engineering, University of Maryland (graduating May 2027)
 
 Experience:
-- Analyst, Deloitte Touche Tomatsu LLP — Oct 2023 to Jul 2025. Supported security-adjacent analytics and
-  machine learning workflows using Python and JavaScript. Worked across AWS and Azure for enterprise-scale
-  analytics. Assisted in secure data handling, model evaluation, and feedback pipelines for ML systems.
-  Coordinated deliverables across cross-functional teams while maintaining security and compliance requirements.
-- Full Stack Development Intern, Zedex Info Pvt. Ltd — Jul 2022 to Apr 2023. Designed and deployed a secure
-  web-based ERP system using React, Node.js, and GraphQL. Implemented authentication, authorization, API
-  security controls, and secure logging. Integrated third-party APIs with validation and error-handling.
-- Information Security Analyst Intern, CybersmithSecure Pvt Ltd — Apr 2021 to Aug 2021. Conducted
-  vulnerability assessments and penetration testing using Nessus, Burp Suite, and Metasploit. Identified
-  web, network, and configuration vulnerabilities and supported remediation planning. Authored detailed
-  technical reports.
+- Analyst, Deloitte Touche Tomatsu LLP — Oct 2023 to Jul 2025. Security-adjacent analytics and
+  ML workflows using Python and JavaScript across AWS and Azure. Secure data handling, model
+  evaluation, feedback pipelines.
+- Full Stack Development Intern, Zedex Info Pvt. Ltd — Jul 2022 to Apr 2023. Secure ERP system
+  in React, Node.js, GraphQL. Authentication, authorization, API security, secure logging.
+- Information Security Analyst Intern, CybersmithSecure Pvt Ltd — Apr 2021 to Aug 2021.
+  Vulnerability assessments and penetration testing using Nessus, Burp Suite, Metasploit.
 
-Projects:
-- DFIR Automation Framework (github.com/franciskonikkara/DFIR-Project): Full DFIR automation combining
-  SOC automation with comprehensive DFIR capabilities. Modules: disk/memory/network forensics, IR workflow
-  (PICERL), malware analysis (static + dynamic), threat hunting (7 hypotheses), Wazuh/TheHive/Shuffle SOAR
-  integration, VirusTotal/MISP/AlienVault OTX threat intel, 10 custom MITRE ATT&CK-mapped Wazuh rules.
-- Secure CI/CD Pipeline (DevSecOps): Compliance-ready CI/CD pipeline with embedded SAST, secrets scanning,
-  and container vulnerability scanning. Policy-as-code security gates with audit-grade evidence aligned
-  with SOC 2 and ISO/IEC 27001 controls.
-- SIEM & Detection Engineering Lab: ELK-based SIEM platform to ingest, normalize, and analyze security
-  logs. Detection rules mapped to MITRE ATT&CK techniques, attack scenario simulation, SOC triage and
-  incident response workflows.
-- Malware Analysis Lab: Static and dynamic analysis of Windows and Linux malware samples. IOC extraction,
-  execution behavior analysis, reverse engineering and sandboxing techniques.
+Projects (pick ONE that matches the company — do not mention all of them):
+- DFIR Automation Framework (github.com/franciskonikkara/DFIR-Project): disk/memory/network
+  forensics, IR workflow (PICERL), malware analysis, threat hunting (7 hypotheses),
+  Wazuh/TheHive/Shuffle SOAR, VirusTotal/MISP/AlienVault OTX, 10 MITRE ATT&CK-mapped rules.
+  USE FOR: DFIR, forensics, incident response, malware, SOC, threat detection companies.
+- Secure CI/CD Pipeline (DevSecOps): SAST, secrets scanning, container scanning, policy-as-code
+  gates aligned with SOC 2 and ISO/IEC 27001.
+  USE FOR: DevSecOps, AppSec, cloud security, compliance companies.
+- SIEM & Detection Engineering Lab: ELK SIEM, MITRE ATT&CK detection rules, attack simulation.
+  USE FOR: SIEM vendors, detection engineering, threat hunting, SOC automation companies.
+- Malware Analysis Lab: static and dynamic analysis, IOC extraction, reverse engineering.
+  USE FOR: malware analysis, reverse engineering, threat intelligence, EDR companies.
 
-Skills: Python, Go, JavaScript, TypeScript, Bash, PowerShell, SQL, ReactJS, Django, Flask, Node.js |
-        Nessus, Metasploit, Burp Suite, Wireshark, Nmap, OSINT |
-        Splunk, ELK, Wazuh, TheHive, Shuffle | AWS, Azure, GCP, Docker, Kubernetes, Terraform |
-        MITRE ATT&CK, OWASP Top 10, Sigma, YARA, Volatility 3, Scapy
-Certs: Certified Ethical Hacker (CEH), Practical Ethical Hacking (TCM Security)
+Skills: Python, Go, Bash, Nessus, Metasploit, Burp Suite, Wireshark, Splunk, ELK, Wazuh,
+        Volatility 3, YARA, Sigma, MITRE ATT&CK, AWS, Azure, Docker, Kubernetes
+Certs: CEH, Practical Ethical Hacking (TCM Security)
 CTF: UMBC Nightwing CTF (3rd Place), Fword CTF, Cyber Apocalypse CTF
 """
 
-HUMANIZER_RULES = """
-STRICT HUMANIZER RULES (25 AI-pattern checks):
+# ---------------------------------------------------------------------------
+# Per-role project mapping — tells Claude exactly which project to highlight
+# ---------------------------------------------------------------------------
 
-=== BANNED WORDS AND PHRASES (instant reject if any appear) ===
+PROJECT_MAP = {
+    "DFIR / forensics": (
+        "DFIR Automation Framework",
+        "built a full DFIR automation framework covering disk/memory/network forensics, "
+        "PICERL IR workflow, malware analysis, and threat hunting with Wazuh/TheHive/Shuffle "
+        "SOAR and 10 custom MITRE ATT&CK-mapped detection rules "
+        "(github.com/franciskonikkara/DFIR-Project)"
+    ),
+    "SOC / threat detection": (
+        "SIEM & Detection Engineering Lab",
+        "built an ELK-based SIEM with MITRE ATT&CK-mapped detection rules, attack simulation, "
+        "and SOC triage workflows — also integrated Wazuh with custom detection rules in my "
+        "DFIR framework"
+    ),
+    "malware analysis": (
+        "Malware Analysis Lab + DFIR Framework",
+        "built a malware analysis lab covering static and dynamic analysis, IOC extraction, "
+        "and reverse engineering, with sandboxing and Volatility 3 for memory forensics as "
+        "part of my DFIR automation framework"
+    ),
+    "offensive security / red team": (
+        "penetration testing work + CTF",
+        "did hands-on penetration testing at CybersmithSecure using Nessus, Burp Suite, and "
+        "Metasploit, hold a CEH, and placed 3rd at UMBC Nightwing CTF"
+    ),
+    "DevSecOps / AppSec": (
+        "Secure CI/CD Pipeline",
+        "built a compliance-ready CI/CD pipeline with SAST, secrets scanning, container "
+        "scanning, and policy-as-code security gates aligned with SOC 2 and ISO/IEC 27001"
+    ),
+    "cloud security": (
+        "Secure CI/CD + Deloitte cloud work",
+        "built a DevSecOps pipeline with container scanning and policy-as-code, and spent "
+        "two years at Deloitte working across AWS and Azure on enterprise-scale analytics "
+        "with secure data handling and compliance requirements"
+    ),
+    "AI security / product security": (
+        "ML security work at Deloitte + DFIR Framework",
+        "worked on ML model evaluation and secure data pipelines at Deloitte, and my DFIR "
+        "framework includes threat intel integration and automated detection logic that could "
+        "apply to ML-assisted security workflows"
+    ),
+    "embedded / IoT security": (
+        "penetration testing + low-level tooling",
+        "did vulnerability assessments at CybersmithSecure and have hands-on experience "
+        "with Nessus, Burp Suite, and Metasploit — currently building detection tools "
+        "using Scapy for network-level analysis"
+    ),
+    "general security engineering": (
+        "DFIR Automation Framework",
+        "built a full DFIR automation framework covering forensics, incident response, "
+        "malware analysis, and threat hunting with Wazuh SOAR integration and MITRE "
+        "ATT&CK-mapped detection rules (github.com/franciskonikkara/DFIR-Project)"
+    ),
+}
+
+# ---------------------------------------------------------------------------
+# Humanizer rules — professional outreach
+# ---------------------------------------------------------------------------
+
+HUMANIZER_RULES = """
+STRICT EMAIL STRUCTURE (follow this order exactly):
+
+SENTENCE 1 — THEIR WORK:
+  Mention one specific, real, verifiable thing about what this company does or recently
+  published. Name a product feature, a specific blog post topic, a CVE they patched, a
+  tool they released, or a concrete technical problem they solve.
+  NOT a compliment ("Your work is impressive"). NOT vague ("You do interesting security work").
+  A FACT. Example: "Cloudflare's blog post on blocking 230 billion threats daily using
+  their Radar dataset caught my attention because of how the detection pipeline scales."
+
+SENTENCES 2-3 — FRANCIS'S MATCHING WORK:
+  Describe what Francis built that directly connects to what they do. Name the project.
+  Name the specific technology or technique. Show the parallel.
+  Example: "I built a DFIR automation framework that integrates Wazuh, TheHive, and Shuffle
+  for SOC triage, with 10 custom MITRE ATT&CK-mapped detection rules — the detection
+  engineering problem you're working on at scale is exactly what I want to work on next."
+
+SENTENCE 4 — CPT LINE:
+  "I'm CPT-authorized for summer 2026, no sponsorship needed."
+
+SENTENCE 5 — THE ASK:
+  "If there's a security intern role open this summer, I'd like to talk."
+  Direct. Not desperate. Not "I would be honored."
+
+SIGN-OFF:
+  Francis Konikkara | francisanthony0328@gmail.com | github.com/franciskonikkara
+
+=== BANNED WORDS (instant fail if any appear) ===
 Additionally, Furthermore, Moreover, testament to, landscape, showcasing, delve, crucial,
 vital, leverage, utilize, impactful, passionate, excited, eager, genuinely, straightforward,
-delighted, thrilled, pivotal, groundbreaking, remarkable, incredible, impressive, breathtaking.
+delighted, thrilled, pivotal, groundbreaking, remarkable, incredible, impressive, breathtaking,
+synergy, opportunity, journey.
 
 === BANNED CONSTRUCTIONS ===
-- No bullet points or lists in the email body
-- No em dashes. One comma or period instead.
-- No rule-of-three ("I bring X, Y, and Z"). Use one or two items.
-- No "It's not just X, it's Y" negative parallelisms. Say Y directly.
-- No "from X to Y" false ranges that pad rather than inform.
-- No "serves as", "acts as", "functions as". Use "is" or "has".
-- No synonym cycling. Pick the clearest word and repeat it.
-- No significance inflation ("pivotal moment", "landmark"). State the fact.
-- No formulaic challenges ("despite facing challenges"). Name the actual problem or skip it.
-- No excessive hedging ("could potentially possibly"). One modifier max.
-- No filler: "In order to" -> "to". "Due to the fact that" -> "because".
-- No generic conclusions or platitudes.
-- No sycophantic openers ("Great question!", "Absolutely!").
-- No chatbot artifacts ("I hope this helps!", "Let me know if...").
-- No bold, headers, or formatting. Plain prose only.
+- No bullet points or lists in the body
+- No em dashes
+- No "I hope this email finds you well"
+- No "I came across your company"
+- No "I've always admired"
+- No "Your company is doing incredible/amazing things"
+- No rule-of-three ("X, Y, and Z skills")
+- No "serves as / acts as / functions as"
+- No sycophantic openers
+- No chatbot closings ("Looking forward to hearing from you!", "Let me know if...")
+- No bold, headers, or markdown formatting
 
-=== BANNED EMAIL OPENERS ===
-- "I hope this email finds you well"
-- "I came across your company and was immediately drawn to..."
-- "I've always admired..."
-- "Your company is doing incredible things"
-- "I've long followed your work"
-- "I am a passionate/dedicated/driven student seeking..."
+=== LENGTH ===
+150-200 words total. Hard cap. Every sentence must earn its place.
 
-=== WHAT TO DO ===
-- Opening: one specific sentence about something real and current about the company. A product detail,
-  a recent blog post, a specific problem they solve. Not a compliment. A factual observation.
-- Background: 2-3 sentences. Match to what this company does. Pick the most relevant parts of Francis's
-  background. Do not dump everything.
-- One project mention: DFIR Framework for incident response/SOC/forensics. CI/CD Pipeline for DevSecOps.
-  SIEM lab for detection engineering/threat hunting. Malware lab for malware analysis. One line.
-- CPT line: "I'm CPT-authorized for summer 2026, no sponsorship needed."
-- Ask: "If there's a security intern role open this summer, I'd like to talk." Direct, not desperate.
-- Sign-off: Francis Konikkara | francisanthony0328@gmail.com | github.com/franciskonikkara
-
-=== LENGTH AND TONE ===
-- 150-200 words. Hard cap.
-- Direct and confident. Like someone with real work behind them reaching out because the company is
-  genuinely interesting.
-- Subject line: specific and human. NOT "Internship Application — Summer 2026 — Francis Konikkara"
-
-=== FINAL AUDIT ===
-After writing, re-read the email and check for any of the 25 banned patterns above. If any slip through,
-rewrite that sentence.
+=== SUBJECT LINE ===
+Reference what THEY are working on specifically. Not "Internship Application".
+Example: "Cloudflare's threat detection pipeline — summer 2026"
 """
 
 SYSTEM_PROMPT = (
     "You are writing a cold outreach email on behalf of Francis Konikkara, "
-    "a cybersecurity graduate student and practitioner. Write in his voice — direct, "
-    "confident, specific, no AI-speak. Follow the humanizer rules exactly."
+    "a cybersecurity graduate student. Write in his voice — direct, confident, specific. "
+    "The email must lead with something specific about the company's work, "
+    "then connect it to Francis's own projects. No AI-speak. No flattery."
+)
+
+# ---------------------------------------------------------------------------
+# Humanizer rules — PhD collaboration outreach
+# ---------------------------------------------------------------------------
+
+PHD_HUMANIZER_RULES = """
+STRICT EMAIL STRUCTURE (follow this order exactly):
+
+SENTENCE 1 — THEIR RESEARCH:
+  Name their specific paper title, technique, or the exact problem they're researching.
+  Show you actually know what they work on.
+  NOT "I came across your research". NOT "Your work on X is fascinating".
+  A factual, technical observation. Example: "Your work on coverage-guided fuzzing for
+  network protocol parsers addresses the exact blind spot that existing tools like AFL
+  miss on stateful inputs."
+
+SENTENCES 2-3 — FRANCIS'S PARALLEL WORK:
+  Describe what Francis is building that overlaps with their research. Name the project.
+  Name the specific technical detail that connects. Make the overlap clear and concrete.
+  Example: "I'm building a DFIR automation framework that does memory forensics with
+  Volatility 3 and threat hunting against 7 hypotheses — the malware persistence
+  techniques you're analyzing are exactly what I'm trying to detect at the artifact level."
+
+SENTENCE 4 — THE ASK:
+  One concrete, specific ask. A 20-minute call about a specific problem. Feedback on a
+  specific idea. Asking if there's room to contribute to a specific part of their work.
+  NOT "I'd love to collaborate". NOT "Any opportunity to work with you would be amazing".
+  Example: "Would you be open to a 20-minute call about how you're handling evasion
+  in your dynamic analysis pipeline?"
+
+SIGN-OFF:
+  Francis Konikkara | francisanthony0328@gmail.com | github.com/franciskonikkara
+
+=== BANNED WORDS ===
+Additionally, Furthermore, Moreover, testament to, landscape, showcasing, delve, crucial,
+vital, leverage, utilize, impactful, passionate, excited, eager, genuinely, straightforward,
+delighted, thrilled, pivotal, groundbreaking, remarkable, incredible, impressive, breathtaking,
+synergy, collaboration opportunities, mutually beneficial, mentorship.
+
+=== BANNED CONSTRUCTIONS ===
+- No bullet points
+- No em dashes
+- No "I hope this email finds you well"
+- No "I've always admired your research"
+- No "Your work is groundbreaking"
+- No "I would love to pick your brain"
+- No "I am a passionate student seeking mentorship"
+- No chatbot closings
+
+=== LENGTH ===
+120-160 words. Hard cap.
+
+=== SUBJECT LINE ===
+Reference their specific research topic or paper. NOT "Collaboration request".
+Example: "Memory forensics for malware persistence — connecting to your evasion work"
+"""
+
+PHD_SYSTEM_PROMPT = (
+    "You are writing a research outreach email on behalf of Francis Konikkara, "
+    "a cybersecurity graduate student at UMD. Write peer-to-peer — direct, specific, "
+    "technical. Lead with their research, then show Francis's parallel work. "
+    "No flattery. No AI-speak."
 )
 
 
+# ---------------------------------------------------------------------------
+# Role classifier
+# ---------------------------------------------------------------------------
+
 def _classify_target_role(company_research: dict) -> str:
-    """Pick the most relevant role angle based on company description."""
     text = (
         company_research.get("description", "")
-        + " "
-        + company_research.get("recent_news", "")
-        + " "
-        + company_research.get("open_roles", "")
+        + " " + company_research.get("recent_news", "")
+        + " " + company_research.get("open_roles", "")
     ).lower()
 
     if any(kw in text for kw in ["bug bounty", "penetration", "red team", "offensive", "pentest"]):
@@ -140,10 +266,18 @@ def _classify_target_role(company_research: dict) -> str:
     return "general security engineering"
 
 
+def _select_project(role_type: str) -> tuple[str, str]:
+    """Return (project_name, project_description) for this role type."""
+    return PROJECT_MAP.get(role_type, PROJECT_MAP["general security engineering"])
+
+
+# ---------------------------------------------------------------------------
+# Claude wrapper
+# ---------------------------------------------------------------------------
+
 def _call_claude(prompt: str) -> str:
-    """Call Anthropic API with a prompt and return the text response."""
     try:
-        client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+        client = anthropic.Anthropic()
         message = client.messages.create(
             model="claude-haiku-4-5-20251001",
             max_tokens=1024,
@@ -155,44 +289,50 @@ def _call_claude(prompt: str) -> str:
         return ""
 
 
+# ---------------------------------------------------------------------------
+# Professional outreach email
+# ---------------------------------------------------------------------------
+
 def write_email(
     company_name: str,
     contact_name: str,
     company_research: dict,
 ) -> tuple[str, str] | None:
-    """
-    Returns (subject, body) or None on failure.
-    """
-    target_role = _classify_target_role(company_research)
+    """Returns (subject, body) or None on failure."""
+    role_type = _classify_target_role(company_research)
+    project_name, project_desc = _select_project(role_type)
 
     research_block = f"""
 Company: {company_name}
-Homepage: {company_research.get('homepage_url', 'N/A')}
-Description: {company_research.get('description', 'N/A')[:800]}
-Recent news/blog: {company_research.get('recent_news', 'N/A')[:500]}
-Open roles: {company_research.get('open_roles', 'N/A')[:400]}
+What they do: {company_research.get('description', 'N/A')[:600]}
+Recent news / blog posts / products: {company_research.get('recent_news', 'N/A')[:500]}
+Open roles: {company_research.get('open_roles', 'N/A')[:300]}
+Role angle for this email: {role_type}
 """
 
     prompt = f"""{SYSTEM_PROMPT}
 
 Write a cold internship outreach email to {contact_name or 'the security team'} at {company_name}.
 
-About the company (from research):
+--- COMPANY RESEARCH (use this to write sentence 1 about THEIR work) ---
 {research_block}
 
-About Francis:
+--- FRANCIS'S PROJECT TO HIGHLIGHT (use this for sentences 2-3 about HIS work) ---
+Project: {project_name}
+What he built: {project_desc}
+
+--- FULL PROFILE (for CPT line and sign-off only — do NOT dump everything) ---
 {ABOUT_ME}
 
-Target role: {target_role}
-
+--- RULES ---
 {HUMANIZER_RULES}
 
-Output ONLY the email — subject line first (no "Subject:" prefix), then a blank line, then the body. Nothing else. No preamble."""
+Output ONLY the email — subject line first (no "Subject:" prefix), blank line, then body. Nothing else."""
 
     try:
         raw = _call_claude(prompt)
         if not raw:
-            logger.error(f"Empty response from Anthropic API for {company_name}")
+            logger.error(f"Empty response for {company_name}")
             return None
         return _parse_email(raw)
     except Exception as e:
@@ -200,82 +340,55 @@ Output ONLY the email — subject line first (no "Subject:" prefix), then a blan
         return None
 
 
-PHD_HUMANIZER_RULES = """
-STRICT RULES FOR PHD COLLABORATION EMAIL:
-
-=== BANNED WORDS ===
-Additionally, Furthermore, Moreover, testament to, landscape, showcasing, delve, crucial,
-vital, leverage, utilize, impactful, passionate, excited, eager, genuinely, straightforward,
-delighted, thrilled, pivotal, groundbreaking, remarkable, incredible, impressive, breathtaking,
-synergy, collaboration opportunities, mutually beneficial.
-
-=== BANNED CONSTRUCTIONS ===
-- No bullet points or lists
-- No em dashes
-- No "I came across your work and was immediately drawn to"
-- No "I've always admired your research"
-- No "Your work is groundbreaking/remarkable"
-- No "I would love to pick your brain"
-- No "I am a passionate student seeking mentorship"
-- No generic openers like "I hope this email finds you well"
-- No chatbot closings like "Looking forward to your response!"
-
-=== WHAT TO DO ===
-- Opening: one specific sentence about their actual research — name the paper, technique,
-  or problem they work on. Show you actually read it.
-- 2-3 sentences about what Francis is building or researching that connects to their work.
-  Be specific — name the tool, method, or problem.
-- One concrete ask: a 20-minute call, feedback on a specific idea, or asking if there's
-  room to contribute to a specific part of their research.
-- Keep it peer-to-peer. Francis is a grad student reaching out to a fellow researcher,
-  not a fan asking for mentorship.
-- Sign-off: Francis Konikkara | francisanthony0328@gmail.com | github.com/franciskonikkara
-
-=== LENGTH AND TONE ===
-- 120-160 words. Hard cap.
-- Direct and specific. No flattery. No fluff.
-- Subject line: reference their research topic specifically. NOT "Collaboration request"
-
-=== FINAL AUDIT ===
-Re-read and remove any AI-speak, flattery, or vague phrases before outputting.
-"""
-
-PHD_SYSTEM_PROMPT = (
-    "You are writing a research collaboration email on behalf of Francis Konikkara, "
-    "a cybersecurity graduate student at UMD. Write peer-to-peer — direct, specific, "
-    "no AI-speak, no flattery. Francis is reaching out as a fellow researcher."
-)
-
+# ---------------------------------------------------------------------------
+# PhD collaboration email
+# ---------------------------------------------------------------------------
 
 def write_phd_email(student: dict) -> tuple[str, str] | None:
-    """
-    Write a research collaboration email to a PhD student.
-    student dict: {name, email, university, research_area, recent_work, source}
-    Returns (subject, body) or None on failure.
-    """
+    """Returns (subject, body) or None on failure."""
     name = student.get("name", "the researcher")
     first_name = name.split()[0] if name else "Hi"
     university = student.get("university", "your university")
     research_area = student.get("research_area", "cybersecurity")
     recent_work = student.get("recent_work", "")
 
-    research_context = f"Research area: {research_area}"
+    # Pick the Francis project most relevant to their research area
+    area_lower = research_area.lower()
+    if any(kw in area_lower for kw in ["malware", "reverse", "binary", "exploit", "vulnerability"]):
+        project_name, project_desc = _select_project("malware analysis")
+    elif any(kw in area_lower for kw in ["forensic", "dfir", "incident", "artifact", "memory"]):
+        project_name, project_desc = _select_project("DFIR / forensics")
+    elif any(kw in area_lower for kw in ["detection", "siem", "threat hunt", "soc", "sigma"]):
+        project_name, project_desc = _select_project("SOC / threat detection")
+    elif any(kw in area_lower for kw in ["devsecops", "supply chain", "appsec", "sast", "fuzzing"]):
+        project_name, project_desc = _select_project("DevSecOps / AppSec")
+    elif any(kw in area_lower for kw in ["network", "protocol", "traffic", "intrusion"]):
+        project_name, project_desc = _select_project("DFIR / forensics")
+    else:
+        project_name, project_desc = _select_project("general security engineering")
+
+    their_work_block = f"Research area: {research_area}"
     if recent_work:
-        research_context += f"\nRecent work / paper: {recent_work}"
+        their_work_block += f"\nSpecific paper / project: {recent_work}"
 
     prompt = f"""{PHD_SYSTEM_PROMPT}
 
-Write a cold research collaboration email to {first_name} ({name}), a PhD student at {university}.
+Write a research outreach email to {first_name} ({name}), PhD student at {university}.
 
-Their research:
-{research_context}
+--- THEIR RESEARCH (lead the email with this — be specific and technical) ---
+{their_work_block}
 
-About Francis (use only what's relevant to their research):
+--- FRANCIS'S PROJECT THAT CONNECTS TO THEIR WORK (use for sentences 2-3) ---
+Project: {project_name}
+What he built: {project_desc}
+
+--- FRANCIS'S FULL PROFILE (for context — do not dump everything) ---
 {ABOUT_ME}
 
+--- RULES ---
 {PHD_HUMANIZER_RULES}
 
-Output ONLY the email — subject line first (no "Subject:" prefix), then a blank line, then the body. Nothing else."""
+Output ONLY the email — subject line first (no "Subject:" prefix), blank line, then body. Nothing else."""
 
     try:
         raw = _call_claude(prompt)
@@ -288,27 +401,24 @@ Output ONLY the email — subject line first (no "Subject:" prefix), then a blan
         return None
 
 
+# ---------------------------------------------------------------------------
+# Parser
+# ---------------------------------------------------------------------------
+
 def _parse_email(raw: str) -> tuple[str, str] | None:
-    """Split raw output into (subject, body)."""
     lines = raw.strip().splitlines()
     if not lines:
         return None
-
     subject = ""
     body_start = 0
     for i, line in enumerate(lines):
-        line = line.strip()
-        if line:
-            subject = line
+        if line.strip():
+            subject = line.strip()
             body_start = i + 1
             break
-
     while body_start < len(lines) and not lines[body_start].strip():
         body_start += 1
-
     body = "\n".join(lines[body_start:]).strip()
-
     if not subject or not body:
         return None
-
     return subject, body
