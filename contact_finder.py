@@ -169,15 +169,35 @@ def find_contact(company_name: str, domain: str) -> tuple[str, str]:
         _save_contact(company_name, domain, email, name, position, "web mining")
         return email, f"{name} ({position})" if position else name
 
-    # ── 5. Named person + inferred email pattern ─────────────────────────────
+    # ── 5. Named person + email pattern combos ───────────────────────────────
     person_name, title = _find_named_person(company_name)
     if person_name:
-        pattern = _infer_email_pattern(company_name, domain)
-        if pattern:
-            email = _apply_pattern(person_name, pattern, domain)
+        parts = person_name.lower().split()
+        if len(parts) >= 2:
+            first, last = parts[0], parts[-1]
+
+            # 5a. Try Hunter email-finder first (1 API call, best accuracy)
+            if hunter_key:
+                email, _ = _hunter_email_finder(domain, first.capitalize(), last.capitalize(), hunter_key)
+                if email:
+                    logger.info(f"[Hunter finder via name] {person_name} ({title}) <{email}>")
+                    _save_contact(company_name, domain, email, person_name, title, "hunter.io (email-finder)")
+                    return email, f"{person_name} ({title})" if title else person_name
+
+            # 5b. Scan web to detect the domain's email format, then apply it
+            pattern = _infer_email_pattern(company_name, domain)
+            if pattern:
+                email = _apply_pattern(person_name, pattern, domain)
+                if email:
+                    logger.info(f"[Pattern inferred] {person_name} ({title}) <{email}>")
+                    _save_contact(company_name, domain, email, person_name, title, "pattern inference")
+                    return email, f"{person_name} ({title})" if title else person_name
+
+            # 5c. Try every common format combo and verify with Hunter
+            email = _try_email_patterns_with_verification(first, last, domain)
             if email:
-                logger.info(f"[Pattern] {person_name} ({title}) <{email}> (inferred)")
-                _save_contact(company_name, domain, email, person_name, title, "pattern inference")
+                logger.info(f"[Pattern combo] {person_name} ({title}) <{email}>")
+                _save_contact(company_name, domain, email, person_name, title, "pattern combo verify")
                 return email, f"{person_name} ({title})" if title else person_name
 
     # ── 6. Contact/team page — personal emails only ──────────────────────────
@@ -510,6 +530,99 @@ def _ddg_email_search(company_name: str, domain: str) -> tuple[str, str]:
 # Strategy 5 — named person + email pattern inference
 # ---------------------------------------------------------------------------
 
+# All common corporate email formats ordered by global frequency.
+# Each entry is (template, description).
+EMAIL_PATTERNS = [
+    ("{first}.{last}",   "first.last"),       # john.doe
+    ("{fi}{last}",       "flast"),             # jdoe
+    ("{fi}.{last}",      "f.last"),            # j.doe
+    ("{first}{last}",    "firstlast"),         # johndoe
+    ("{first}_{last}",   "first_last"),        # john_doe
+    ("{first}-{last}",   "first-last"),        # john-doe
+    ("{first}{li}",      "firstl"),            # johnd  (first + last initial)
+    ("{first}.{li}",     "first.l"),           # john.d
+    ("{last}.{first}",   "last.first"),        # doe.john
+    ("{last}{fi}",       "lastf"),             # doej
+    ("{last}.{fi}",      "last.f"),            # doe.j
+    ("{last}{first}",    "lastfirst"),         # doejohn
+    ("{first}",          "first"),             # john
+    ("{last}",           "last"),              # doe
+]
+
+
+def _generate_email_candidates(first: str, last: str, domain: str) -> list[tuple[str, str]]:
+    """
+    Return list of (email, description) for all common patterns.
+    Skips candidates whose local part is in GENERIC_LOCALS.
+    """
+    fi = first[0] if first else ""
+    li = last[0] if last else ""
+    candidates: list[tuple[str, str]] = []
+    for template, desc in EMAIL_PATTERNS:
+        try:
+            local = template.format(
+                first=first, last=last, fi=fi, li=li,
+            )
+            if local and local not in GENERIC_LOCALS:
+                candidates.append((f"{local}@{domain}", desc))
+        except (KeyError, IndexError):
+            pass
+    # Deduplicate preserving order
+    seen: set[str] = set()
+    unique: list[tuple[str, str]] = []
+    for email, desc in candidates:
+        if email not in seen:
+            seen.add(email)
+            unique.append((email, desc))
+    return unique
+
+
+def _try_email_patterns_with_verification(
+    first: str, last: str, domain: str, max_checks: int = 5
+) -> str:
+    """
+    Generate all email format candidates for (first, last) @ domain,
+    verify each with Hunter until one comes back valid.
+    Caps at `max_checks` verifications to conserve Hunter API quota.
+    Returns the first verified email, or "" if none pass.
+    """
+    hunter_key = os.getenv("HUNTER_API_KEY", "")
+    candidates = _generate_email_candidates(first, last, domain)
+    checked = 0
+    for email, desc in candidates:
+        if checked >= max_checks:
+            break
+        try:
+            if hunter_key:
+                url = "https://api.hunter.io/v2/email-verifier"
+                params = {"email": email, "api_key": hunter_key}
+                resp = requests.get(url, params=params, timeout=10)
+                resp.raise_for_status()
+                status = resp.json().get("data", {}).get("status", "unknown")
+                checked += 1
+                logger.debug(f"[Pattern verify] {email} ({desc}) → {status}")
+                if status == "valid":
+                    logger.info(f"[Pattern combo] confirmed {email} ({desc})")
+                    return email
+                elif status == "invalid":
+                    continue
+                else:
+                    # accept_all / webmail / unknown — optimistically accept
+                    logger.info(f"[Pattern combo] accepting {email} ({desc}) status={status}")
+                    return email
+            else:
+                # No Hunter key — return first candidate optimistically
+                return email
+        except requests.HTTPError as e:
+            code = e.response.status_code if e.response is not None else 0
+            if code == 429:
+                logger.debug("Hunter verifier rate-limited during pattern check — stopping.")
+                break
+        except Exception as e:
+            logger.debug(f"Pattern verify error for {email}: {e}")
+    return ""
+
+
 def _find_named_person(company_name: str) -> tuple[str, str]:
     for role in SECURITY_TITLES:
         try:
@@ -556,6 +669,10 @@ def _extract_person_name(title: str, body: str) -> str:
 
 
 def _infer_email_pattern(company_name: str, domain: str) -> str | None:
+    """
+    Scan web results for live @domain emails to detect the company's format.
+    Returns a format string like '{first}.{last}' or None if unknown.
+    """
     for query in [
         f'site:github.com "@{domain}"',
         f'"{domain}" email -noreply -info',
@@ -570,13 +687,21 @@ def _infer_email_pattern(company_name: str, domain: str) -> str | None:
                     local = email.split("@")[0].lower()
                     if local in GENERIC_LOCALS:
                         continue
+                    # Map the observed local to a pattern template
                     if "." in local:
                         parts = local.split(".")
-                        return "{first}.{last}" if len(parts) == 2 else "{fi}{last}"
+                        if len(parts) == 2 and len(parts[0]) > 1 and len(parts[1]) > 1:
+                            return "{first}.{last}"
+                        elif len(parts) == 2 and len(parts[0]) == 1:
+                            return "{fi}.{last}"
                     elif "-" in local:
                         return "{first}-{last}"
+                    elif "_" in local:
+                        return "{first}_{last}"
+                    elif len(local) <= 4:
+                        return "{fi}{last}"
                     else:
-                        return "{first}"
+                        return "{first}{last}"
             time.sleep(0.25)
         except Exception as e:
             logger.debug(f"Pattern inference failed for {domain}: {e}")
@@ -584,12 +709,15 @@ def _infer_email_pattern(company_name: str, domain: str) -> str | None:
 
 
 def _apply_pattern(full_name: str, pattern: str, domain: str) -> str:
+    """Apply a single known pattern template to a full name."""
     parts = full_name.lower().split()
     if len(parts) < 2:
         return ""
     first, last = parts[0], parts[-1]
+    fi = first[0]
+    li = last[0]
     try:
-        return f"{pattern.format(first=first, last=last, fi=first[0])}@{domain}"
+        return f"{pattern.format(first=first, last=last, fi=fi, li=li)}@{domain}"
     except Exception:
         return ""
 
