@@ -259,5 +259,50 @@
     "domain": "nvidia.com",
     "source": "web mining",
     "found_at": "2026-04-21 15:21"
+  },
+  {
+    "name": "Henk Birkholz",
+    "position": "GitHub",
+    "company": "Fraunhofer SIT",
+    "email": "henk.birkholz@sit.fraunhofer.de",
+    "domain": "sit.fraunhofer.de",
+    "source": "web mining",
+    "found_at": "2026-04-22 14:47"
+  },
+  {
+    "name": "Jdoe",
+    "position": "GitHub",
+    "company": "NetSPI",
+    "email": "jdoe@netspi.com",
+    "domain": "netspi.com",
+    "source": "web mining",
+    "found_at": "2026-04-22 14:47"
+  },
+  {
+    "name": "Fconvert Feedback",
+    "position": "GitHub",
+    "company": "Fortinet",
+    "email": "fconvert_feedback@fortinet.com",
+    "domain": "fortinet.com",
+    "source": "web mining",
+    "found_at": "2026-04-22 14:48"
+  },
+  {
+    "name": "Kmaulden",
+    "position": "GitHub",
+    "company": "Deloitte",
+    "email": "kmaulden@deloitte.com",
+    "domain": "deloitte.com",
+    "source": "web mining",
+    "found_at": "2026-04-22 14:49"
+  },
+  {
+    "name": "Apurva",
+    "position": "blog",
+    "company": "Aembit",
+    "email": "apurva@aembit.io",
+    "domain": "aembit.io",
+    "source": "web mining",
+    "found_at": "2026-04-22 14:50"
   }
 ]

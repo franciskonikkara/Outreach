@@ -43,5 +43,14 @@
     "date_sent": "2026-04-21",
     "subject": "Fuzzing and Binary Analysis Collaboration",
     "status": "sent"
+  },
+  {
+    "name": "Sinuo Fan",
+    "email": "sinuo.fan@tufts.edu",
+    "university": "Tufts University",
+    "research_area": "machine learning security and model optimization",
+    "date_sent": "2026-04-22",
+    "subject": "Machine Learning Security and Adversarial Robustness",
+    "status": "sent"
   }
 ]

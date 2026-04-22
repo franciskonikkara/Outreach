@@ -257,5 +257,40 @@
     "contact_name": "Psirt (GitHub)",
     "subject": "Security-focused internship \u2014 DFIR and detection engineering background",
     "sent_at": "2026-04-21 15:22"
+  },
+  {
+    "company": "Fraunhofer SIT",
+    "contact_email": "henk.birkholz@sit.fraunhofer.de",
+    "contact_name": "Henk Birkholz (GitHub)",
+    "subject": "Fraunhofer SIT's ATHENE Cyber Range \u2014 realistic attack simulation at scale",
+    "sent_at": "2026-04-22 14:47"
+  },
+  {
+    "company": "NetSPI",
+    "contact_email": "jdoe@netspi.com",
+    "contact_name": "Jdoe (GitHub)",
+    "subject": "Offensive Security Internship \u2014 Summer 2026",
+    "sent_at": "2026-04-22 14:47"
+  },
+  {
+    "company": "Fortinet",
+    "contact_email": "fconvert_feedback@fortinet.com",
+    "contact_name": "Fconvert Feedback (GitHub)",
+    "subject": "Fortinet's FortiAI shift to predictive threat detection caught my attention",
+    "sent_at": "2026-04-22 14:48"
+  },
+  {
+    "company": "Deloitte",
+    "contact_email": "kmaulden@deloitte.com",
+    "contact_name": "Kmaulden (GitHub)",
+    "subject": "Deloitte's cyber AI blueprints \u2014 security automation at scale",
+    "sent_at": "2026-04-22 14:49"
+  },
+  {
+    "company": "Aembit",
+    "contact_email": "apurva@aembit.io",
+    "contact_name": "Apurva (blog)",
+    "subject": "Aembit's approach to non-human identity in agentic AI",
+    "sent_at": "2026-04-22 14:50"
   }
 ]
