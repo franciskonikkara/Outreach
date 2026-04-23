@@ -358,5 +358,53 @@
     "date_sent": "2026-04-22",
     "subject": "Identity entitlements at scale \u2014 Veza's core problem",
     "status": "sent"
+  },
+  {
+    "company": "Nozomi Networks",
+    "contact_email": "jil.backstrom@nozominetworks.com",
+    "contact_name": "Jil Backstrom (blog)",
+    "date_sent": "2026-04-23",
+    "subject": "Nozomi Networks' OT asset inventory and vulnerability mapping automation",
+    "status": "sent"
+  },
+  {
+    "company": "Netflix",
+    "contact_email": "netflixoss@netflix.com",
+    "contact_name": "Netflixoss (GitHub)",
+    "date_sent": "2026-04-23",
+    "subject": "Netflix's mature bug bounty program and security incident response process caught my attention, especially how you've built public trust around vulnerability disclosure and remediation at scale.",
+    "status": "sent"
+  },
+  {
+    "company": "Intel 471",
+    "contact_email": "gsimon@intel471.com",
+    "contact_name": "Gerard Simon (CISO)",
+    "date_sent": "2026-04-23",
+    "subject": "Intel 471's February 2022 analysis of Trickbot's persistence through coordinated takedowns caught my attention because it required connecting threat intelligence across multiple sources to track modular malware evolution in real time.",
+    "status": "sent"
+  },
+  {
+    "company": "Apiiro",
+    "contact_email": "labs@apiiro.com",
+    "contact_name": "Labs (GitHub)",
+    "date_sent": "2026-04-23",
+    "subject": "Apiiro's AI Threat Modeling feature caught my attention because it shifts security left by identifying risks before code reaches the pipeline\u2014that's the detection problem I've been working on from the opposite angle.",
+    "status": "sent"
+  },
+  {
+    "company": "Saviynt",
+    "contact_email": "the.new@saviynt.com",
+    "contact_name": "The New (CISO)",
+    "date_sent": "2026-04-23",
+    "subject": "Saviynt's AI identity governance model \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Apple",
+    "contact_email": "danerickson@apple.com",
+    "contact_name": "Dan Erickson (Head of Security)",
+    "date_sent": "2026-04-23",
+    "subject": "Apple's zero-day patching cadence and ML-assisted threat detection across iOS, macOS, and Safari",
+    "status": "sent"
   }
 ]

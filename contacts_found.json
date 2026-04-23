@@ -313,5 +313,59 @@
     "domain": "veza.com",
     "source": "web mining",
     "found_at": "2026-04-22 15:20"
+  },
+  {
+    "name": "Jil Backstrom",
+    "position": "blog",
+    "company": "Nozomi Networks",
+    "email": "jil.backstrom@nozominetworks.com",
+    "domain": "nozominetworks.com",
+    "source": "web mining",
+    "found_at": "2026-04-23 15:12"
+  },
+  {
+    "name": "Netflixoss",
+    "position": "GitHub",
+    "company": "Netflix",
+    "email": "netflixoss@netflix.com",
+    "domain": "netflix.com",
+    "source": "web mining",
+    "found_at": "2026-04-23 15:13"
+  },
+  {
+    "name": "Gerard Simon",
+    "position": "CISO",
+    "company": "Intel 471",
+    "email": "gsimon@intel471.com",
+    "domain": "intel471.com",
+    "source": "pattern inference",
+    "found_at": "2026-04-23 15:14"
+  },
+  {
+    "name": "Labs",
+    "position": "GitHub",
+    "company": "Apiiro",
+    "email": "labs@apiiro.com",
+    "domain": "apiiro.com",
+    "source": "web mining",
+    "found_at": "2026-04-23 15:15"
+  },
+  {
+    "name": "The New",
+    "position": "CISO",
+    "company": "Saviynt",
+    "email": "the.new@saviynt.com",
+    "domain": "saviynt.com",
+    "source": "pattern inference",
+    "found_at": "2026-04-23 15:16"
+  },
+  {
+    "name": "Dan Erickson",
+    "position": "Head of Security",
+    "company": "Apple",
+    "email": "danerickson@apple.com",
+    "domain": "apple.com",
+    "source": "pattern inference",
+    "found_at": "2026-04-23 15:16"
   }
 ]
