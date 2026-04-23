@@ -406,5 +406,21 @@
     "date_sent": "2026-04-23",
     "subject": "Apple's zero-day patching cadence and ML-assisted threat detection across iOS, macOS, and Safari",
     "status": "sent"
+  },
+  {
+    "company": "Snowflake",
+    "contact_email": "piotr.halama@snowflake.com",
+    "contact_name": "Piotr Halama (GitHub)",
+    "date_sent": "2026-04-23",
+    "subject": "Cortex Code + ML model security \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Akamai",
+    "contact_email": "ajayapra@akamai.com",
+    "contact_name": "Ajayapra (GitHub)",
+    "date_sent": "2026-04-23",
+    "subject": "Akamai's adaptive AI threat detection in your global honeypot network",
+    "status": "sent"
   }
 ]

@@ -52,5 +52,14 @@
     "date_sent": "2026-04-22",
     "subject": "Machine Learning Security and Adversarial Robustness",
     "status": "sent"
+  },
+  {
+    "name": "Syed Ali Qasim",
+    "email": "qasimsa@vcu.edu",
+    "university": "Virginia Commonwealth University",
+    "research_area": "digital forensics and industrial control systems",
+    "date_sent": "2026-04-23",
+    "subject": "Digital forensics automation for ICS environments",
+    "status": "sent"
   }
 ]

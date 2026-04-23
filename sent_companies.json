@@ -341,5 +341,19 @@
     "contact_name": "Dan Erickson (Head of Security)",
     "subject": "Apple's zero-day patching cadence and ML-assisted threat detection across iOS, macOS, and Safari",
     "sent_at": "2026-04-23 15:16"
+  },
+  {
+    "company": "Snowflake",
+    "contact_email": "piotr.halama@snowflake.com",
+    "contact_name": "Piotr Halama (GitHub)",
+    "subject": "Cortex Code + ML model security \u2014 summer 2026",
+    "sent_at": "2026-04-23 15:59"
+  },
+  {
+    "company": "Akamai",
+    "contact_email": "ajayapra@akamai.com",
+    "contact_name": "Ajayapra (GitHub)",
+    "subject": "Akamai's adaptive AI threat detection in your global honeypot network",
+    "sent_at": "2026-04-23 16:01"
   }
 ]

@@ -367,5 +367,23 @@
     "domain": "apple.com",
     "source": "pattern inference",
     "found_at": "2026-04-23 15:16"
+  },
+  {
+    "name": "Piotr Halama",
+    "position": "GitHub",
+    "company": "Snowflake",
+    "email": "piotr.halama@snowflake.com",
+    "domain": "snowflake.com",
+    "source": "web mining",
+    "found_at": "2026-04-23 15:59"
+  },
+  {
+    "name": "Ajayapra",
+    "position": "GitHub",
+    "company": "Akamai",
+    "email": "ajayapra@akamai.com",
+    "domain": "akamai.com",
+    "source": "web mining",
+    "found_at": "2026-04-23 16:01"
   }
 ]
