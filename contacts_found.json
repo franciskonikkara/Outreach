@@ -385,5 +385,41 @@
     "domain": "akamai.com",
     "source": "web mining",
     "found_at": "2026-04-23 16:01"
+  },
+  {
+    "name": "User Name",
+    "position": "GitHub",
+    "company": "Accenture",
+    "email": "user.name@accenture.com",
+    "domain": "accenture.com",
+    "source": "web mining",
+    "found_at": "2026-04-24 14:45"
+  },
+  {
+    "name": "Emre",
+    "position": "GitHub",
+    "company": "Binalyze",
+    "email": "emre@binalyze.com",
+    "domain": "binalyze.com",
+    "source": "web mining",
+    "found_at": "2026-04-24 14:47"
+  },
+  {
+    "name": "Capacity Contact",
+    "position": "GitHub",
+    "company": "Intezer",
+    "email": "capacity.contact@intezer.com",
+    "domain": "intezer.com",
+    "source": "web mining",
+    "found_at": "2026-04-24 14:48"
+  },
+  {
+    "name": "Cloud Integrations",
+    "position": "GitHub",
+    "company": "CrowdStrike",
+    "email": "cloud-integrations@crowdstrike.com",
+    "domain": "crowdstrike.com",
+    "source": "web mining",
+    "found_at": "2026-04-24 14:48"
   }
 ]

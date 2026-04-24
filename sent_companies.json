@@ -355,5 +355,33 @@
     "contact_name": "Ajayapra (GitHub)",
     "subject": "Akamai's adaptive AI threat detection in your global honeypot network",
     "sent_at": "2026-04-23 16:01"
+  },
+  {
+    "company": "Accenture",
+    "contact_email": "user.name@accenture.com",
+    "contact_name": "User Name (GitHub)",
+    "subject": "Accenture's AI security scaling work \u2014 summer 2026",
+    "sent_at": "2026-04-24 14:45"
+  },
+  {
+    "company": "Binalyze",
+    "contact_email": "emre@binalyze.com",
+    "contact_name": "Emre (GitHub)",
+    "subject": "AIR's consolidated investigation hub and threat intel integration",
+    "sent_at": "2026-04-24 14:47"
+  },
+  {
+    "company": "Intezer",
+    "contact_email": "capacity.contact@intezer.com",
+    "contact_name": "Capacity Contact (GitHub)",
+    "subject": "AI SOC alert investigation automation \u2014 summer 2026",
+    "sent_at": "2026-04-24 14:48"
+  },
+  {
+    "company": "CrowdStrike",
+    "contact_email": "cloud-integrations@crowdstrike.com",
+    "contact_name": "Cloud Integrations (GitHub)",
+    "subject": "CrowdStrike's AI-native threat detection for evasive adversaries \u2014 summer 2026",
+    "sent_at": "2026-04-24 14:48"
   }
 ]
