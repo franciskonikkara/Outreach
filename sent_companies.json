@@ -383,5 +383,33 @@
     "contact_name": "Cloud Integrations (GitHub)",
     "subject": "CrowdStrike's AI-native threat detection for evasive adversaries \u2014 summer 2026",
     "sent_at": "2026-04-24 14:48"
+  },
+  {
+    "company": "Sandia National Laboratories",
+    "contact_email": "lblakel@sandia.gov",
+    "contact_name": "Lblakel (GitHub)",
+    "subject": "Sandia's Explosive Destruction System efficiency gains \u2014 embedded security testing",
+    "sent_at": "2026-04-24 15:14"
+  },
+  {
+    "company": "Trail of Bits",
+    "contact_email": "opensource@trailofbits.com",
+    "contact_name": "Opensource (GitHub)",
+    "subject": "Trail of Bits' vulnerability disclosure on the elliptic library caught my attention because it shows the gap between widely-deployed crypto implementations and the security audits that catch real-world attack vectors.",
+    "sent_at": "2026-04-24 15:16"
+  },
+  {
+    "company": "Orca Security",
+    "contact_email": "ofir.yakobi@orca.security",
+    "contact_name": "Ofir Yakobi (GitHub)",
+    "subject": "Orca Security's agentless cloud risk visibility and AI-assisted threat detection",
+    "sent_at": "2026-04-24 15:16"
+  },
+  {
+    "company": "Bugcrowd",
+    "contact_email": "xxxx@bugcrowd.com",
+    "contact_name": "Xxxx (web search)",
+    "subject": "Bugcrowd's AI Triage Assistant and AI Analytics \u2014 offensive security internship",
+    "sent_at": "2026-04-24 15:17"
   }
 ]

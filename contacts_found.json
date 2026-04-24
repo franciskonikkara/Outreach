@@ -421,5 +421,41 @@
     "domain": "crowdstrike.com",
     "source": "web mining",
     "found_at": "2026-04-24 14:48"
+  },
+  {
+    "name": "Lblakel",
+    "position": "GitHub",
+    "company": "Sandia National Laboratories",
+    "email": "lblakel@sandia.gov",
+    "domain": "sandia.gov",
+    "source": "web mining",
+    "found_at": "2026-04-24 15:14"
+  },
+  {
+    "name": "Opensource",
+    "position": "GitHub",
+    "company": "Trail of Bits",
+    "email": "opensource@trailofbits.com",
+    "domain": "trailofbits.com",
+    "source": "web mining",
+    "found_at": "2026-04-24 15:16"
+  },
+  {
+    "name": "Ofir Yakobi",
+    "position": "GitHub",
+    "company": "Orca Security",
+    "email": "ofir.yakobi@orca.security",
+    "domain": "orca.security",
+    "source": "web mining",
+    "found_at": "2026-04-24 15:16"
+  },
+  {
+    "name": "Xxxx",
+    "position": "web search",
+    "company": "Bugcrowd",
+    "email": "xxxx@bugcrowd.com",
+    "domain": "bugcrowd.com",
+    "source": "web mining",
+    "found_at": "2026-04-24 15:17"
   }
 ]
