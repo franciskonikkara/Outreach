@@ -502,5 +502,41 @@
     "domain": "goldmansachs.com",
     "source": "web mining",
     "found_at": "2026-04-27 15:09"
+  },
+  {
+    "name": "Corretto Team",
+    "position": "GitHub",
+    "company": "Amazon",
+    "email": "corretto-team@amazon.com",
+    "domain": "amazon.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:53"
+  },
+  {
+    "name": "Julietamartinez",
+    "position": "GitHub",
+    "company": "Meta",
+    "email": "julietamartinez@meta.com",
+    "domain": "meta.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:55"
+  },
+  {
+    "name": "Github App",
+    "position": "GitHub",
+    "company": "Cycode",
+    "email": "github.app@cycode.com",
+    "domain": "cycode.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:56"
+  },
+  {
+    "name": "Cdoman",
+    "position": "GitHub",
+    "company": "Cado Security",
+    "email": "cdoman@cadosecurity.com",
+    "domain": "cadosecurity.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:56"
   }
 ]

@@ -526,5 +526,37 @@
     "date_sent": "2026-04-27",
     "subject": "Goldman Sachs' product security and ML-assisted detection work across trading floors and global market infrastructure requires hardened detection pipelines that can scale across disparate data sources without breaking.",
     "status": "sent"
+  },
+  {
+    "company": "Amazon",
+    "contact_email": "corretto-team@amazon.com",
+    "contact_name": "Corretto Team (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Corretto Team's work hardening the Java Virtual Machine against supply chain and runtime attacks is exactly the kind of low-level security problem I want to solve.",
+    "status": "sent"
+  },
+  {
+    "company": "Meta",
+    "contact_email": "julietamartinez@meta.com",
+    "contact_name": "Julietamartinez (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Meta's SOC and threat detection infrastructure across Facebook, Instagram, and WhatsApp",
+    "status": "sent"
+  },
+  {
+    "company": "Cycode",
+    "contact_email": "github.app@cycode.com",
+    "contact_name": "Github App (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Cycode's AI-driven SSCS platform that combines AST, ASPM, and automated detection logic caught my attention because you're solving the exact problem I've been working on: scaling security decisions without drowning analysts in noise.",
+    "status": "sent"
+  },
+  {
+    "company": "Cado Security",
+    "contact_email": "cdoman@cadosecurity.com",
+    "contact_name": "Cdoman (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Cloud forensics at scale \u2014 summer 2026",
+    "status": "sent"
   }
 ]

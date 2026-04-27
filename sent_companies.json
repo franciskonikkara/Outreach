@@ -446,5 +446,33 @@
     "contact_name": "Anne Black (GitHub)",
     "subject": "Goldman Sachs' product security and ML-assisted detection work across trading floors and global market infrastructure requires hardened detection pipelines that can scale across disparate data sources without breaking.",
     "sent_at": "2026-04-27 15:09"
+  },
+  {
+    "company": "Amazon",
+    "contact_email": "corretto-team@amazon.com",
+    "contact_name": "Corretto Team (GitHub)",
+    "subject": "Corretto Team's work hardening the Java Virtual Machine against supply chain and runtime attacks is exactly the kind of low-level security problem I want to solve.",
+    "sent_at": "2026-04-27 15:53"
+  },
+  {
+    "company": "Meta",
+    "contact_email": "julietamartinez@meta.com",
+    "contact_name": "Julietamartinez (GitHub)",
+    "subject": "Meta's SOC and threat detection infrastructure across Facebook, Instagram, and WhatsApp",
+    "sent_at": "2026-04-27 15:55"
+  },
+  {
+    "company": "Cycode",
+    "contact_email": "github.app@cycode.com",
+    "contact_name": "Github App (GitHub)",
+    "subject": "Cycode's AI-driven SSCS platform that combines AST, ASPM, and automated detection logic caught my attention because you're solving the exact problem I've been working on: scaling security decisions without drowning analysts in noise.",
+    "sent_at": "2026-04-27 15:56"
+  },
+  {
+    "company": "Cado Security",
+    "contact_email": "cdoman@cadosecurity.com",
+    "contact_name": "Cdoman (GitHub)",
+    "subject": "Cloud forensics at scale \u2014 summer 2026",
+    "sent_at": "2026-04-27 15:57"
   }
 ]
