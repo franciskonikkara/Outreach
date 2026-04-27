@@ -457,5 +457,50 @@
     "domain": "bugcrowd.com",
     "source": "web mining",
     "found_at": "2026-04-24 15:17"
+  },
+  {
+    "name": "Opensource",
+    "position": "GitHub",
+    "company": "Cloudflare",
+    "email": "opensource@cloudflare.com",
+    "domain": "cloudflare.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:08"
+  },
+  {
+    "name": "Vulnreport",
+    "position": "GitHub",
+    "company": "Tenable",
+    "email": "vulnreport@tenable.com",
+    "domain": "tenable.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:08"
+  },
+  {
+    "name": "Tobi",
+    "position": "GitHub",
+    "company": "Airbnb",
+    "email": "tobi@airbnb.com",
+    "domain": "airbnb.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:08"
+  },
+  {
+    "name": "Community Plugins",
+    "position": "GitHub",
+    "company": "Aqua Security",
+    "email": "community.plugins@aquasec.com",
+    "domain": "aquasec.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:09"
+  },
+  {
+    "name": "Anne Black",
+    "position": "GitHub",
+    "company": "Goldman Sachs",
+    "email": "anne.black@goldmansachs.com",
+    "domain": "goldmansachs.com",
+    "source": "web mining",
+    "found_at": "2026-04-27 15:09"
   }
 ]

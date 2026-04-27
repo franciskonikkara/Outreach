@@ -486,5 +486,45 @@
     "date_sent": "2026-04-24",
     "subject": "Bugcrowd's AI Triage Assistant and AI Analytics \u2014 offensive security internship",
     "status": "sent"
+  },
+  {
+    "company": "Cloudflare",
+    "contact_email": "opensource@cloudflare.com",
+    "contact_name": "Opensource (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Cloudflare's AI security and threat detection at scale \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Tenable",
+    "contact_email": "vulnreport@tenable.com",
+    "contact_name": "Vulnreport (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Vulnreport & ML-assisted exposure assessment \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Airbnb",
+    "contact_email": "tobi@airbnb.com",
+    "contact_name": "Tobi (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Airbnb's API-first security deposit system and AirCover framework handle millions of financial transactions and host-guest trust relationships, which means your product security team is managing threat models across payment flows, data pipelines, and third-party integrations at scale.",
+    "status": "sent"
+  },
+  {
+    "company": "Aqua Security",
+    "contact_email": "community.plugins@aquasec.com",
+    "contact_name": "Community Plugins (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Aqua Trivy's shift-left approach to vulnerability scanning \u2014 no database dependencies, binary install into CI/CD \u2014 caught my attention because detection speed and pipeline integration are the hard problems.",
+    "status": "sent"
+  },
+  {
+    "company": "Goldman Sachs",
+    "contact_email": "anne.black@goldmansachs.com",
+    "contact_name": "Anne Black (GitHub)",
+    "date_sent": "2026-04-27",
+    "subject": "Goldman Sachs' product security and ML-assisted detection work across trading floors and global market infrastructure requires hardened detection pipelines that can scale across disparate data sources without breaking.",
+    "status": "sent"
   }
 ]

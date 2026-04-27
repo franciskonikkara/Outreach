@@ -411,5 +411,40 @@
     "contact_name": "Xxxx (web search)",
     "subject": "Bugcrowd's AI Triage Assistant and AI Analytics \u2014 offensive security internship",
     "sent_at": "2026-04-24 15:17"
+  },
+  {
+    "company": "Cloudflare",
+    "contact_email": "opensource@cloudflare.com",
+    "contact_name": "Opensource (GitHub)",
+    "subject": "Cloudflare's AI security and threat detection at scale \u2014 summer 2026",
+    "sent_at": "2026-04-27 15:08"
+  },
+  {
+    "company": "Tenable",
+    "contact_email": "vulnreport@tenable.com",
+    "contact_name": "Vulnreport (GitHub)",
+    "subject": "Vulnreport & ML-assisted exposure assessment \u2014 summer 2026",
+    "sent_at": "2026-04-27 15:08"
+  },
+  {
+    "company": "Airbnb",
+    "contact_email": "tobi@airbnb.com",
+    "contact_name": "Tobi (GitHub)",
+    "subject": "Airbnb's API-first security deposit system and AirCover framework handle millions of financial transactions and host-guest trust relationships, which means your product security team is managing threat models across payment flows, data pipelines, and third-party integrations at scale.",
+    "sent_at": "2026-04-27 15:08"
+  },
+  {
+    "company": "Aqua Security",
+    "contact_email": "community.plugins@aquasec.com",
+    "contact_name": "Community Plugins (GitHub)",
+    "subject": "Aqua Trivy's shift-left approach to vulnerability scanning \u2014 no database dependencies, binary install into CI/CD \u2014 caught my attention because detection speed and pipeline integration are the hard problems.",
+    "sent_at": "2026-04-27 15:09"
+  },
+  {
+    "company": "Goldman Sachs",
+    "contact_email": "anne.black@goldmansachs.com",
+    "contact_name": "Anne Black (GitHub)",
+    "subject": "Goldman Sachs' product security and ML-assisted detection work across trading floors and global market infrastructure requires hardened detection pipelines that can scale across disparate data sources without breaking.",
+    "sent_at": "2026-04-27 15:09"
   }
 ]
