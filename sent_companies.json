@@ -495,5 +495,12 @@
     "contact_name": "Jane Doe (blog)",
     "subject": "Arctic Wolf's CVE tracking and threat intel integration \u2014 summer 2026",
     "sent_at": "2026-04-28 15:31"
+  },
+  {
+    "company": "IBM",
+    "contact_email": "ashrivastava@ibm.com",
+    "contact_name": "Ashrivastava (GitHub)",
+    "subject": "IBM X-Force vulnerability exploitation detection \u2014 summer 2026",
+    "sent_at": "2026-04-28 16:12"
   }
 ]

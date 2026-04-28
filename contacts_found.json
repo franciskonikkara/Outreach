@@ -565,5 +565,14 @@
     "domain": "arcticwolf.com",
     "source": "web mining",
     "found_at": "2026-04-28 15:30"
+  },
+  {
+    "name": "Ashrivastava",
+    "position": "GitHub",
+    "company": "IBM",
+    "email": "ashrivastava@ibm.com",
+    "domain": "ibm.com",
+    "source": "web mining",
+    "found_at": "2026-04-28 16:12"
   }
 ]
