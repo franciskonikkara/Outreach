@@ -558,5 +558,29 @@
     "date_sent": "2026-04-27",
     "subject": "Cloud forensics at scale \u2014 summer 2026",
     "status": "sent"
+  },
+  {
+    "company": "Chainguard",
+    "contact_email": "interest@chainguard.dev",
+    "contact_name": "Interest (GitHub)",
+    "date_sent": "2026-04-28",
+    "subject": "Chainguard's partnership with Cursor to embed hardened open source into AI-generated code workflows caught my attention because it solves a real problem: verifying dependencies as AI systems select and implement them requires detection logic that understands both the supply chain and the threat model.",
+    "status": "sent"
+  },
+  {
+    "company": "Snap",
+    "contact_email": "mstudios@snap.com",
+    "contact_name": "Marvel Studios (Head of Security)",
+    "date_sent": "2026-04-28",
+    "subject": "Snap's safety and privacy by design framework, especially the threat detection work protecting teen users and preventing account fraud, is the kind of detection engineering problem I want to solve at scale.",
+    "status": "sent"
+  },
+  {
+    "company": "Arctic Wolf",
+    "contact_email": "jane.doe@arcticwolf.com",
+    "contact_name": "Jane Doe (blog)",
+    "date_sent": "2026-04-28",
+    "subject": "Arctic Wolf's CVE tracking and threat intel integration \u2014 summer 2026",
+    "status": "sent"
   }
 ]

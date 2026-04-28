@@ -538,5 +538,32 @@
     "domain": "cadosecurity.com",
     "source": "web mining",
     "found_at": "2026-04-27 15:56"
+  },
+  {
+    "name": "Interest",
+    "position": "GitHub",
+    "company": "Chainguard",
+    "email": "interest@chainguard.dev",
+    "domain": "chainguard.dev",
+    "source": "web mining",
+    "found_at": "2026-04-28 15:28"
+  },
+  {
+    "name": "Marvel Studios",
+    "position": "Head of Security",
+    "company": "Snap",
+    "email": "mstudios@snap.com",
+    "domain": "snap.com",
+    "source": "pattern inference",
+    "found_at": "2026-04-28 15:30"
+  },
+  {
+    "name": "Jane Doe",
+    "position": "blog",
+    "company": "Arctic Wolf",
+    "email": "jane.doe@arcticwolf.com",
+    "domain": "arcticwolf.com",
+    "source": "web mining",
+    "found_at": "2026-04-28 15:30"
   }
 ]
