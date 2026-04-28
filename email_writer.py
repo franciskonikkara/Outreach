@@ -178,28 +178,26 @@ SYSTEM_PROMPT = (
 # Humanizer rules — PhD collaboration outreach
 # ---------------------------------------------------------------------------
 
-PHD_HUMANIZER_RULES = """
+PHD_HUMANIZER_RULES_WITH_PAPER = """
 STRICT EMAIL STRUCTURE (follow this order exactly):
 
-SENTENCE 1 — THEIR RESEARCH:
-  Name their specific paper title, technique, or the exact problem they're researching.
-  Show you actually know what they work on.
-  NOT "I came across your research". NOT "Your work on X is fascinating".
-  A factual, technical observation. Example: "Your work on coverage-guided fuzzing for
-  network protocol parsers addresses the exact blind spot that existing tools like AFL
-  miss on stateful inputs."
+SENTENCE 1 — THEIR SPECIFIC PAPER:
+  Reference the exact paper title provided. Make one specific, technical observation about
+  the problem it addresses or the approach it takes.
+  NOT a compliment ("Your paper is impressive"). A factual technical statement.
+  Example: "Your paper on coverage-guided fuzzing for network protocol parsers addresses
+  the exact blind spot AFL misses on stateful inputs."
 
 SENTENCES 2-3 — FRANCIS'S PARALLEL WORK:
-  Describe what Francis is building that overlaps with their research. Name the project.
-  Name the specific technical detail that connects. Make the overlap clear and concrete.
+  Describe what Francis built that directly connects to that paper. Name the project.
+  Name the specific technique or artifact. Make the overlap concrete.
   Example: "I'm building a DFIR automation framework that does memory forensics with
   Volatility 3 and threat hunting against 7 hypotheses — the malware persistence
-  techniques you're analyzing are exactly what I'm trying to detect at the artifact level."
+  techniques your paper analyzes are exactly what I'm trying to detect at the artifact level."
 
 SENTENCE 4 — THE ASK:
-  One concrete, specific ask. A 20-minute call about a specific problem. Feedback on a
-  specific idea. Asking if there's room to contribute to a specific part of their work.
-  NOT "I'd love to collaborate". NOT "Any opportunity to work with you would be amazing".
+  One concrete ask. A 20-minute call about a specific technical problem or gap in their work.
+  NOT "I'd love to collaborate". NOT vague interest.
   Example: "Would you be open to a 20-minute call about how you're handling evasion
   in your dynamic analysis pipeline?"
 
@@ -221,13 +219,63 @@ synergy, collaboration opportunities, mutually beneficial, mentorship.
 - No "I would love to pick your brain"
 - No "I am a passionate student seeking mentorship"
 - No chatbot closings
+- NEVER invent, guess, or paraphrase a paper title not explicitly given to you
 
 === LENGTH ===
 120-160 words. Hard cap.
 
 === SUBJECT LINE ===
-Reference their specific research topic or paper. NOT "Collaboration request".
+Reference the specific paper topic. NOT "Collaboration request".
 Example: "Memory forensics for malware persistence — connecting to your evasion work"
+"""
+
+PHD_HUMANIZER_RULES_NO_PAPER = """
+STRICT EMAIL STRUCTURE (follow this order exactly):
+
+SENTENCE 1 — THEIR RESEARCH AREA:
+  Name the specific technical problem they work on (from the research area provided).
+  Make a concrete, factual technical observation about that problem space.
+  NOT a compliment. NOT vague. A technical statement about the problem itself.
+  Example: "Binary analysis for firmware vulnerabilities has a coverage problem that
+  most static tools don't solve well — you're working on exactly that."
+  IMPORTANT: Do NOT reference a specific paper title. You were not given one.
+  Do NOT invent a paper title. If you cannot name a real paper, describe the research
+  area's problem concretely.
+
+SENTENCES 2-3 — FRANCIS'S PARALLEL WORK:
+  Describe what Francis built that directly overlaps with their research area.
+  Name the project. Name the specific technique. Show the connection concretely.
+
+SENTENCE 4 — THE ASK:
+  One concrete ask tied to their research area. A specific question or call request.
+  NOT "I'd love to collaborate". NOT vague interest.
+
+SIGN-OFF:
+  Francis Konikkara | francisanthony0328@gmail.com | github.com/franciskonikkara
+
+=== BANNED WORDS ===
+Additionally, Furthermore, Moreover, testament to, landscape, showcasing, delve, crucial,
+vital, leverage, utilize, impactful, passionate, excited, eager, genuinely, straightforward,
+delighted, thrilled, pivotal, groundbreaking, remarkable, incredible, impressive, breathtaking,
+synergy, collaboration opportunities, mutually beneficial, mentorship.
+
+=== BANNED CONSTRUCTIONS ===
+- No bullet points
+- No em dashes
+- No "I hope this email finds you well"
+- No "I've always admired your research"
+- No "Your work is groundbreaking"
+- No "I would love to pick your brain"
+- No "I am a passionate student seeking mentorship"
+- No chatbot closings
+- NEVER invent or hallucinate a paper title — you were not given one
+
+=== LENGTH ===
+120-160 words. Hard cap.
+
+=== SUBJECT LINE ===
+Reference their research area specifically. NOT "Collaboration request".
+Example: "Binary firmware analysis — connecting on detection at the artifact level"
 """
 
 PHD_SYSTEM_PROMPT = (
@@ -367,9 +415,24 @@ def write_phd_email(student: dict) -> tuple[str, str] | None:
     else:
         project_name, project_desc = _select_project("general security engineering")
 
-    their_work_block = f"Research area: {research_area}"
-    if recent_work:
-        their_work_block += f"\nSpecific paper / project: {recent_work}"
+    # Choose rules based on whether a REAL verified paper title is available.
+    # If recent_work is empty or blank, we must NOT hallucinate one — use the
+    # no-paper ruleset which instructs Claude to describe the research area instead.
+    has_real_paper = bool(recent_work and recent_work.strip())
+    rules = PHD_HUMANIZER_RULES_WITH_PAPER if has_real_paper else PHD_HUMANIZER_RULES_NO_PAPER
+
+    if has_real_paper:
+        their_work_block = (
+            f"Research area: {research_area}\n"
+            f"Specific verified paper title (use this — do NOT change or paraphrase it): "
+            f"{recent_work.strip()}"
+        )
+    else:
+        their_work_block = (
+            f"Research area: {research_area}\n"
+            f"NOTE: No specific paper title is available. Reference the research area "
+            f"concretely. Do NOT invent a paper title."
+        )
 
     prompt = f"""{PHD_SYSTEM_PROMPT}
 
@@ -386,7 +449,7 @@ What he built: {project_desc}
 {ABOUT_ME}
 
 --- RULES ---
-{PHD_HUMANIZER_RULES}
+{rules}
 
 Output ONLY the email — subject line first (no "Subject:" prefix), blank line, then body. Nothing else."""
 

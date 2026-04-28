@@ -204,7 +204,10 @@ For each PhD student (NOT professors/faculty), extract:
 - email: their .edu email if visible, else empty string
 - university: university name
 - research_area: 3-6 word description (e.g. "malware analysis and reverse engineering")
-- recent_work: title of a paper or project they're working on, or empty string
+- recent_work: ONLY fill this if a specific paper title or named project is LITERALLY present
+  in the text. Copy the exact title as it appears. If no paper/project title is visible in
+  the text, leave this as empty string "". DO NOT guess, infer, or invent paper titles —
+  a hallucinated title is worse than no title.
 
 Rules:
 - Only include current PhD students or PhD candidates, not professors
