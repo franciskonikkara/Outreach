@@ -614,5 +614,29 @@
     "date_sent": "2026-04-29",
     "subject": "YesWeHack's continuous vulnerability discovery model \u2014 summer 2026",
     "status": "sent"
+  },
+  {
+    "company": "Upwind Security",
+    "contact_email": "jane.doe@upwind.io",
+    "contact_name": "Jane Doe (web search)",
+    "date_sent": "2026-04-29",
+    "subject": "Upwind's runtime-first approach to serverless security \u2014 combining CNAPP posture with real-time threat context",
+    "status": "sent"
+  },
+  {
+    "company": "Dragos",
+    "contact_email": "bmcconnel@dragos.com",
+    "contact_name": "Bmcconnel (web search)",
+    "date_sent": "2026-04-29",
+    "subject": "OT visibility gaps and automated detection \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Cisco",
+    "contact_email": "test@cisco.com",
+    "contact_name": "Test (GitHub)",
+    "date_sent": "2026-04-29",
+    "subject": "Cisco Secure Client threat detection \u2014 summer 2026",
+    "status": "sent"
   }
 ]

@@ -601,5 +601,32 @@
     "domain": "yeswehack.com",
     "source": "web mining",
     "found_at": "2026-04-29 15:18"
+  },
+  {
+    "name": "Jane Doe",
+    "position": "web search",
+    "company": "Upwind Security",
+    "email": "jane.doe@upwind.io",
+    "domain": "upwind.io",
+    "source": "web mining",
+    "found_at": "2026-04-29 15:58"
+  },
+  {
+    "name": "Bmcconnel",
+    "position": "web search",
+    "company": "Dragos",
+    "email": "bmcconnel@dragos.com",
+    "domain": "dragos.com",
+    "source": "web mining",
+    "found_at": "2026-04-29 15:58"
+  },
+  {
+    "name": "Test",
+    "position": "GitHub",
+    "company": "Cisco",
+    "email": "test@cisco.com",
+    "domain": "cisco.com",
+    "source": "web mining",
+    "found_at": "2026-04-29 15:59"
   }
 ]
