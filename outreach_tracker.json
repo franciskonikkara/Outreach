@@ -590,5 +590,29 @@
     "date_sent": "2026-04-28",
     "subject": "IBM X-Force vulnerability exploitation detection \u2014 summer 2026",
     "status": "sent"
+  },
+  {
+    "company": "Descope",
+    "contact_email": "desmond@descope.com",
+    "contact_name": "Desmond (GitHub)",
+    "date_sent": "2026-04-29",
+    "subject": "Descope's Agentic Identity Hub caught my attention because you're solving a real gap: how to authenticate and authorize AI agents at scale when most identity platforms were built for human users.",
+    "status": "sent"
+  },
+  {
+    "company": "Check Point Software",
+    "contact_email": "slavam@checkpoint.com",
+    "contact_name": "Slavam (GitHub)",
+    "date_sent": "2026-04-29",
+    "subject": "Check Point's AI Factory Firewalls and threat detection at 99.8% effectiveness",
+    "status": "sent"
+  },
+  {
+    "company": "YesWeHack",
+    "contact_email": "project@yeswehack.com",
+    "contact_name": "Project (GitHub)",
+    "date_sent": "2026-04-29",
+    "subject": "YesWeHack's continuous vulnerability discovery model \u2014 summer 2026",
+    "status": "sent"
   }
 ]

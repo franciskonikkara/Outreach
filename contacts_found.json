@@ -574,5 +574,32 @@
     "domain": "ibm.com",
     "source": "web mining",
     "found_at": "2026-04-28 16:12"
+  },
+  {
+    "name": "Desmond",
+    "position": "GitHub",
+    "company": "Descope",
+    "email": "desmond@descope.com",
+    "domain": "descope.com",
+    "source": "web mining",
+    "found_at": "2026-04-29 15:16"
+  },
+  {
+    "name": "Slavam",
+    "position": "GitHub",
+    "company": "Check Point Software",
+    "email": "slavam@checkpoint.com",
+    "domain": "checkpoint.com",
+    "source": "web mining",
+    "found_at": "2026-04-29 15:17"
+  },
+  {
+    "name": "Project",
+    "position": "GitHub",
+    "company": "YesWeHack",
+    "email": "project@yeswehack.com",
+    "domain": "yeswehack.com",
+    "source": "web mining",
+    "found_at": "2026-04-29 15:18"
   }
 ]
