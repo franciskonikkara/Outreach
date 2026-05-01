@@ -638,5 +638,29 @@
     "date_sent": "2026-04-29",
     "subject": "Cisco Secure Client threat detection \u2014 summer 2026",
     "status": "sent"
+  },
+  {
+    "company": "Intigriti",
+    "contact_email": "community@intigriti.com",
+    "contact_name": "Community (GitHub)",
+    "date_sent": "2026-05-01",
+    "subject": "Bug Bounty Triage and Signal-to-Noise Ratio",
+    "status": "sent"
+  },
+  {
+    "company": "Capital One",
+    "contact_email": "opensource@capitalone.com",
+    "contact_name": "Opensource (GitHub)",
+    "date_sent": "2026-05-01",
+    "subject": "Capital One's Databolt platform security advancements for AI integration caught my attention because the intersection of ML model evaluation and secure data pipelines is where I've spent the last year working.",
+    "status": "sent"
+  },
+  {
+    "company": "AccuKnox",
+    "contact_email": "help@accuknox.com",
+    "contact_name": "Help (GitHub)",
+    "date_sent": "2026-05-01",
+    "subject": "AccuKnox's AI-layer Zero Trust security model \u2014 summer 2026",
+    "status": "sent"
   }
 ]

@@ -628,5 +628,32 @@
     "domain": "cisco.com",
     "source": "web mining",
     "found_at": "2026-04-29 15:59"
+  },
+  {
+    "name": "Community",
+    "position": "GitHub",
+    "company": "Intigriti",
+    "email": "community@intigriti.com",
+    "domain": "intigriti.com",
+    "source": "web mining",
+    "found_at": "2026-05-01 14:19"
+  },
+  {
+    "name": "Opensource",
+    "position": "GitHub",
+    "company": "Capital One",
+    "email": "opensource@capitalone.com",
+    "domain": "capitalone.com",
+    "source": "web mining",
+    "found_at": "2026-05-01 14:19"
+  },
+  {
+    "name": "Help",
+    "position": "GitHub",
+    "company": "AccuKnox",
+    "email": "help@accuknox.com",
+    "domain": "accuknox.com",
+    "source": "web mining",
+    "found_at": "2026-05-01 14:19"
   }
 ]
