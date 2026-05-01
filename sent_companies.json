@@ -565,5 +565,33 @@
     "contact_name": "Help (GitHub)",
     "subject": "AccuKnox's AI-layer Zero Trust security model \u2014 summer 2026",
     "sent_at": "2026-05-01 14:20"
+  },
+  {
+    "company": "Zero Networks",
+    "contact_email": "josh.peltz@zeronetworks.com",
+    "contact_name": "Josh Peltz (Head of Security)",
+    "subject": "Zero Networks' segmentation approach to network access control",
+    "sent_at": "2026-05-01 15:03"
+  },
+  {
+    "company": "Endor Labs",
+    "contact_email": "jsmith@endorlabs.com",
+    "contact_name": "Jsmith (blog)",
+    "subject": "AURI and reachability-based SCA \u2014 summer 2026",
+    "sent_at": "2026-05-01 15:04"
+  },
+  {
+    "company": "Recorded Future",
+    "contact_email": "therecord@recordedfuture.com",
+    "contact_name": "Therecord (blog)",
+    "subject": "Recorded Future's Autonomous Threat Operations platform caught my attention because the machine-speed correlation and automated hunting workflow solves a real detection engineering problem at scale.",
+    "sent_at": "2026-05-01 15:04"
+  },
+  {
+    "company": "Exein",
+    "contact_email": "help@exein.io",
+    "contact_name": "Help (GitHub)",
+    "subject": "Exein's Photon runtime security for embedded devices caught my attention, particularly how you're embedding AI-powered threat detection directly into firmware to create a self-sustaining immune system across IoT fleets.",
+    "sent_at": "2026-05-01 15:04"
   }
 ]

@@ -655,5 +655,41 @@
     "domain": "accuknox.com",
     "source": "web mining",
     "found_at": "2026-05-01 14:19"
+  },
+  {
+    "name": "Josh Peltz",
+    "position": "Head of Security",
+    "company": "Zero Networks",
+    "email": "josh.peltz@zeronetworks.com",
+    "domain": "zeronetworks.com",
+    "source": "pattern inference",
+    "found_at": "2026-05-01 15:03"
+  },
+  {
+    "name": "Jsmith",
+    "position": "blog",
+    "company": "Endor Labs",
+    "email": "jsmith@endorlabs.com",
+    "domain": "endorlabs.com",
+    "source": "web mining",
+    "found_at": "2026-05-01 15:04"
+  },
+  {
+    "name": "Therecord",
+    "position": "blog",
+    "company": "Recorded Future",
+    "email": "therecord@recordedfuture.com",
+    "domain": "recordedfuture.com",
+    "source": "web mining",
+    "found_at": "2026-05-01 15:04"
+  },
+  {
+    "name": "Help",
+    "position": "GitHub",
+    "company": "Exein",
+    "email": "help@exein.io",
+    "domain": "exein.io",
+    "source": "web mining",
+    "found_at": "2026-05-01 15:04"
   }
 ]
