@@ -700,5 +700,14 @@
     "domain": "qualys.com",
     "source": "web mining",
     "found_at": "2026-05-04 15:12"
+  },
+  {
+    "name": "Greg Foss",
+    "position": "GitHub",
+    "company": "LogRhythm",
+    "email": "greg.foss@logrhythm.com",
+    "domain": "logrhythm.com",
+    "source": "web mining",
+    "found_at": "2026-05-04 16:05"
   }
 ]

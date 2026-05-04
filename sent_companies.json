@@ -600,5 +600,12 @@
     "contact_name": "Info Fr (web search)",
     "subject": "Qualys Agent Val and autonomous exploit validation \u2014 summer 2026",
     "sent_at": "2026-05-04 15:12"
+  },
+  {
+    "company": "LogRhythm",
+    "contact_email": "greg.foss@logrhythm.com",
+    "contact_name": "Greg Foss (GitHub)",
+    "subject": "LogRhythm's AI-driven SIEM platform and the challenge of proving AI value in security operations",
+    "sent_at": "2026-05-04 16:05"
   }
 ]
