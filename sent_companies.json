@@ -593,5 +593,12 @@
     "contact_name": "Help (GitHub)",
     "subject": "Exein's Photon runtime security for embedded devices caught my attention, particularly how you're embedding AI-powered threat detection directly into firmware to create a self-sustaining immune system across IoT fleets.",
     "sent_at": "2026-05-01 15:04"
+  },
+  {
+    "company": "Qualys",
+    "contact_email": "info-fr@qualys.com",
+    "contact_name": "Info Fr (web search)",
+    "subject": "Qualys Agent Val and autonomous exploit validation \u2014 summer 2026",
+    "sent_at": "2026-05-04 15:12"
   }
 ]

@@ -691,5 +691,14 @@
     "domain": "exein.io",
     "source": "web mining",
     "found_at": "2026-05-01 15:04"
+  },
+  {
+    "name": "Info Fr",
+    "position": "web search",
+    "company": "Qualys",
+    "email": "info-fr@qualys.com",
+    "domain": "qualys.com",
+    "source": "web mining",
+    "found_at": "2026-05-04 15:12"
   }
 ]
