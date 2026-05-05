@@ -607,5 +607,12 @@
     "contact_name": "Greg Foss (GitHub)",
     "subject": "LogRhythm's AI-driven SIEM platform and the challenge of proving AI value in security operations",
     "sent_at": "2026-05-04 16:05"
+  },
+  {
+    "company": "Kusari",
+    "contact_email": "pr_hotline@kusari.dev",
+    "contact_name": "Pr Hotline",
+    "subject": "Kusari's SBOM-to-actionable-insights pipeline for software supply chain security",
+    "sent_at": "2026-05-05 15:57"
   }
 ]

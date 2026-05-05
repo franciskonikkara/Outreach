@@ -709,5 +709,14 @@
     "domain": "logrhythm.com",
     "source": "web mining",
     "found_at": "2026-05-04 16:05"
+  },
+  {
+    "name": "Pr Hotline",
+    "position": "\u2014",
+    "company": "Kusari",
+    "email": "pr_hotline@kusari.dev",
+    "domain": "kusari.dev",
+    "source": "page scrape",
+    "found_at": "2026-05-05 15:57"
   }
 ]
