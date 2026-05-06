@@ -61,5 +61,23 @@
     "date_sent": "2026-04-23",
     "subject": "Digital forensics automation for ICS environments",
     "status": "sent"
+  },
+  {
+    "name": "Christian Rasmussen",
+    "email": "crasmus000@citymail.cuny.edu",
+    "university": "CUNY Grove School of Engineering",
+    "research_area": "quantum circuit security and compilation",
+    "date_sent": "2026-05-06",
+    "subject": "Quantum circuit security and compilation faces a core problem: adversarial manipulation of compiled circuits during synthesis and execution, where the attack surface expands as you optimize for hardware constraints.",
+    "status": "sent"
+  },
+  {
+    "name": "Ragini Gupta",
+    "email": "raginig2@illinois.edu",
+    "university": "University of Illinois at Urbana-Champaign",
+    "research_area": "IoT, wireless sensor networks security",
+    "date_sent": "2026-05-06",
+    "subject": "IoT and wireless sensor networks \u2014 attack surface under resource constraints",
+    "status": "sent"
   }
 ]

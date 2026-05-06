@@ -718,5 +718,23 @@
     "domain": "kusari.dev",
     "source": "page scrape",
     "found_at": "2026-05-05 15:57"
+  },
+  {
+    "name": "Rashesh Varma",
+    "position": "GitHub",
+    "company": "OWASP Foundation",
+    "email": "rashesh.varma@owasp.org",
+    "domain": "owasp.org",
+    "source": "web mining",
+    "found_at": "2026-05-06 15:28"
+  },
+  {
+    "name": "Cirt",
+    "position": "GitHub",
+    "company": "NCC Group",
+    "email": "cirt@nccgroup.com",
+    "domain": "nccgroup.com",
+    "source": "web mining",
+    "found_at": "2026-05-06 15:29"
   }
 ]

@@ -614,5 +614,19 @@
     "contact_name": "Pr Hotline",
     "subject": "Kusari's SBOM-to-actionable-insights pipeline for software supply chain security",
     "sent_at": "2026-05-05 15:57"
+  },
+  {
+    "company": "OWASP Foundation",
+    "contact_email": "rashesh.varma@owasp.org",
+    "contact_name": "Rashesh Varma (GitHub)",
+    "subject": "OWASP Top 10 and secure ML model evaluation \u2014 summer 2026",
+    "sent_at": "2026-05-06 15:28"
+  },
+  {
+    "company": "NCC Group",
+    "contact_email": "cirt@nccgroup.com",
+    "contact_name": "Cirt (GitHub)",
+    "subject": "NCC Group's AI security research \u2014 summer 2026",
+    "sent_at": "2026-05-06 15:29"
   }
 ]
