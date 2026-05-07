@@ -736,5 +736,23 @@
     "domain": "nccgroup.com",
     "source": "web mining",
     "found_at": "2026-05-06 15:29"
+  },
+  {
+    "name": "Sa Zhang",
+    "position": "GitHub",
+    "company": "Elastic",
+    "email": "sa.zhang@elastic.co",
+    "domain": "elastic.co",
+    "source": "web mining",
+    "found_at": "2026-05-07 15:29"
+  },
+  {
+    "name": "Garrett Held",
+    "position": "Head of Security",
+    "company": "DropZone AI",
+    "email": "garrett-held@dropzone.ai",
+    "domain": "dropzone.ai",
+    "source": "pattern inference",
+    "found_at": "2026-05-07 15:31"
   }
 ]

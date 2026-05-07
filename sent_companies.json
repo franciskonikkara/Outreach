@@ -628,5 +628,19 @@
     "contact_name": "Cirt (GitHub)",
     "subject": "NCC Group's AI security research \u2014 summer 2026",
     "sent_at": "2026-05-06 15:29"
+  },
+  {
+    "company": "Elastic",
+    "contact_email": "sa.zhang@elastic.co",
+    "contact_name": "Sa Zhang (GitHub)",
+    "subject": "Elasticsearch's vector database and Search AI capabilities for context-aware threat detection caught my attention, especially how you're embedding retrieval into security workflows.",
+    "sent_at": "2026-05-07 15:29"
+  },
+  {
+    "company": "DropZone AI",
+    "contact_email": "garrett-held@dropzone.ai",
+    "contact_name": "Garrett Held (Head of Security)",
+    "subject": "AI-assisted alert triage at scale \u2014 summer 2026",
+    "sent_at": "2026-05-07 15:31"
   }
 ]
