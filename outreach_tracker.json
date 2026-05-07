@@ -750,5 +750,29 @@
     "date_sent": "2026-05-07",
     "subject": "AI-assisted alert triage at scale \u2014 summer 2026",
     "status": "sent"
+  },
+  {
+    "company": "XBOW",
+    "contact_email": "jjang@xbow.com",
+    "contact_name": "Jjang (GitHub)",
+    "date_sent": "2026-05-07",
+    "subject": "Autonomous offensive security at machine scale \u2014 summer 2026",
+    "status": "sent"
+  },
+  {
+    "company": "Mastercard",
+    "contact_email": "gerbersays@mastercard.com",
+    "contact_name": "Gerber Says (CISO)",
+    "date_sent": "2026-05-07",
+    "subject": "Mastercard's $1.8 billion acquisition of BVNK signals a major shift toward blockchain and digital currency infrastructure, which means payment security now extends into decentralized systems and smart contract validation.",
+    "status": "sent"
+  },
+  {
+    "company": "Oligo Security",
+    "contact_email": "jsmith@oligo.security",
+    "contact_name": "Jsmith (blog)",
+    "date_sent": "2026-05-07",
+    "subject": "Runtime AI security at production speed \u2014 summer 2026",
+    "status": "sent"
   }
 ]

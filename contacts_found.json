@@ -754,5 +754,32 @@
     "domain": "dropzone.ai",
     "source": "pattern inference",
     "found_at": "2026-05-07 15:31"
+  },
+  {
+    "name": "Jjang",
+    "position": "GitHub",
+    "company": "XBOW",
+    "email": "jjang@xbow.com",
+    "domain": "xbow.com",
+    "source": "web mining",
+    "found_at": "2026-05-07 16:09"
+  },
+  {
+    "name": "Gerber Says",
+    "position": "CISO",
+    "company": "Mastercard",
+    "email": "gerbersays@mastercard.com",
+    "domain": "mastercard.com",
+    "source": "pattern inference",
+    "found_at": "2026-05-07 16:10"
+  },
+  {
+    "name": "Jsmith",
+    "position": "blog",
+    "company": "Oligo Security",
+    "email": "jsmith@oligo.security",
+    "domain": "oligo.security",
+    "source": "web mining",
+    "found_at": "2026-05-07 16:12"
   }
 ]
