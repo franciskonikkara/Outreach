@@ -663,5 +663,12 @@
     "contact_name": "Jsmith (blog)",
     "subject": "Runtime AI security at production speed \u2014 summer 2026",
     "sent_at": "2026-05-07 16:12"
+  },
+  {
+    "company": "Noma Security",
+    "contact_email": "rhett@noma.security",
+    "contact_name": "Rhett (web search)",
+    "subject": "Noma's real-time adaptive defenses for prompt injection and model poisoning",
+    "sent_at": "2026-05-08 14:55"
   }
 ]
