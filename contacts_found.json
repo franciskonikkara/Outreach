@@ -790,5 +790,14 @@
     "domain": "noma.security",
     "source": "web mining",
     "found_at": "2026-05-08 14:54"
+  },
+  {
+    "name": "Service",
+    "position": "blog",
+    "company": "Gomboc",
+    "email": "service@gomboc-shop.com",
+    "domain": "gomboc-shop.com",
+    "source": "web mining",
+    "found_at": "2026-05-11 16:36"
   }
 ]

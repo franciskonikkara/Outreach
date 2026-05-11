@@ -670,5 +670,12 @@
     "contact_name": "Rhett (web search)",
     "subject": "Noma's real-time adaptive defenses for prompt injection and model poisoning",
     "sent_at": "2026-05-08 14:55"
+  },
+  {
+    "company": "Gomboc",
+    "contact_email": "service@gomboc-shop.com",
+    "contact_name": "Service (blog)",
+    "subject": "Gomboc's deterministic AI for cloud security and the $13M seed round caught my attention because the detection backlog problem you're solving requires both rigorous model evaluation and automated threat workflows that scale.",
+    "sent_at": "2026-05-11 16:36"
   }
 ]
