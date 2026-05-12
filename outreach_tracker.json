@@ -790,5 +790,13 @@
     "date_sent": "2026-05-11",
     "subject": "Gomboc's deterministic AI for cloud security and the $13M seed round caught my attention because the detection backlog problem you're solving requires both rigorous model evaluation and automated threat workflows that scale.",
     "status": "sent"
+  },
+  {
+    "company": "Ox Security",
+    "contact_email": "nicolas.vuillamy@ox.security",
+    "contact_name": "Nicolas Vuillamy (GitHub)",
+    "date_sent": "2026-05-12",
+    "subject": "Ox Security's ticketing integrations work caught my attention because vulnerability management at scale depends on the speed and precision of getting findings into the systems teams actually use.",
+    "status": "sent"
   }
 ]

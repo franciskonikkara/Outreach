@@ -799,5 +799,14 @@
     "domain": "gomboc-shop.com",
     "source": "web mining",
     "found_at": "2026-05-11 16:36"
+  },
+  {
+    "name": "Nicolas Vuillamy",
+    "position": "GitHub",
+    "company": "Ox Security",
+    "email": "nicolas.vuillamy@ox.security",
+    "domain": "ox.security",
+    "source": "web mining",
+    "found_at": "2026-05-12 15:44"
   }
 ]
