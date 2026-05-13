@@ -684,5 +684,19 @@
     "contact_name": "Nicolas Vuillamy (GitHub)",
     "subject": "Ox Security's ticketing integrations work caught my attention because vulnerability management at scale depends on the speed and precision of getting findings into the systems teams actually use.",
     "sent_at": "2026-05-12 15:44"
+  },
+  {
+    "company": "ConductorOne",
+    "contact_email": "open-source@conductorone.com",
+    "contact_name": "Open Source (GitHub)",
+    "subject": "ConductorOne's AI-native identity security platform \u2014 summer 2026",
+    "sent_at": "2026-05-13 15:44"
+  },
+  {
+    "company": "ArmorCode",
+    "contact_email": "developer@armorcode.com",
+    "contact_name": "Developer (GitHub)",
+    "subject": "ArmorCode's agentic AI for vulnerability prioritization \u2014 summer 2026",
+    "sent_at": "2026-05-13 15:44"
   }
 ]
