@@ -698,5 +698,26 @@
     "contact_name": "Developer (GitHub)",
     "subject": "ArmorCode's agentic AI for vulnerability prioritization \u2014 summer 2026",
     "sent_at": "2026-05-13 15:44"
+  },
+  {
+    "company": "Claroty",
+    "contact_email": "sharon.b@claroty.com",
+    "contact_name": "Sharon.b (GitHub)",
+    "subject": "Claroty's threat detection for cyber-physical systems \u2014 summer 2026",
+    "sent_at": "2026-05-13 16:25"
+  },
+  {
+    "company": "HackerOne",
+    "contact_email": "directory@hackerone.com",
+    "contact_name": "Directory (GitHub)",
+    "subject": "HackerOne's AI red teaming work \u2014 summer 2026",
+    "sent_at": "2026-05-13 16:25"
+  },
+  {
+    "company": "Horizon3.ai",
+    "contact_email": "jane@horizon3.ai",
+    "contact_name": "Jane (web search)",
+    "subject": "Horizon3.ai's autonomous pentesting platform collapses attack paths by automating reconnaissance and exploitation at scale \u2014 that's the offensive security problem I want to solve next.",
+    "sent_at": "2026-05-13 16:27"
   }
 ]

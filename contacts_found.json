@@ -826,5 +826,32 @@
     "domain": "armorcode.com",
     "source": "web mining",
     "found_at": "2026-05-13 15:44"
+  },
+  {
+    "name": "Sharon.b",
+    "position": "GitHub",
+    "company": "Claroty",
+    "email": "sharon.b@claroty.com",
+    "domain": "claroty.com",
+    "source": "web mining",
+    "found_at": "2026-05-13 16:25"
+  },
+  {
+    "name": "Directory",
+    "position": "GitHub",
+    "company": "HackerOne",
+    "email": "directory@hackerone.com",
+    "domain": "hackerone.com",
+    "source": "web mining",
+    "found_at": "2026-05-13 16:25"
+  },
+  {
+    "name": "Jane",
+    "position": "web search",
+    "company": "Horizon3.ai",
+    "email": "jane@horizon3.ai",
+    "domain": "horizon3.ai",
+    "source": "web mining",
+    "found_at": "2026-05-13 16:27"
   }
 ]
