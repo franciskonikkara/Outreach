@@ -853,5 +853,14 @@
     "domain": "horizon3.ai",
     "source": "web mining",
     "found_at": "2026-05-13 16:27"
+  },
+  {
+    "name": "Dicer Discuss",
+    "position": "GitHub",
+    "company": "Databricks",
+    "email": "dicer-discuss@databricks.com",
+    "domain": "databricks.com",
+    "source": "web mining",
+    "found_at": "2026-05-14 16:12"
   }
 ]

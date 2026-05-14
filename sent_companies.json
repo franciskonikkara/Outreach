@@ -719,5 +719,12 @@
     "contact_name": "Jane (web search)",
     "subject": "Horizon3.ai's autonomous pentesting platform collapses attack paths by automating reconnaissance and exploitation at scale \u2014 that's the offensive security problem I want to solve next.",
     "sent_at": "2026-05-13 16:27"
+  },
+  {
+    "company": "Databricks",
+    "contact_email": "dicer-discuss@databricks.com",
+    "contact_name": "Dicer Discuss (GitHub)",
+    "subject": "Databricks' acquisition of Antimatter and move into SIEM caught my attention because securing AI agent authentication and authorization at scale requires both threat detection and secure data pipeline architecture.",
+    "sent_at": "2026-05-14 16:12"
   }
 ]
