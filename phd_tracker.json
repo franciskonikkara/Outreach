@@ -97,5 +97,14 @@
     "date_sent": "2026-05-15",
     "subject": "Cryptography and detection systems \u2014 connecting on key derivation and forensic automation",
     "status": "sent"
+  },
+  {
+    "name": "Sam Buxbaum",
+    "email": "sambux@bu.edu",
+    "university": "Boston University",
+    "research_area": "applied cryptography and distributed systems",
+    "date_sent": "2026-05-15",
+    "subject": "Applied cryptography and distributed systems \u2014 detection layer integration",
+    "status": "sent"
   }
 ]
