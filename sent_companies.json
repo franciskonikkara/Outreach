@@ -726,5 +726,12 @@
     "contact_name": "Dicer Discuss (GitHub)",
     "subject": "Databricks' acquisition of Antimatter and move into SIEM caught my attention because securing AI agent authentication and authorization at scale requires both threat detection and secure data pipeline architecture.",
     "sent_at": "2026-05-14 16:12"
+  },
+  {
+    "company": "Socket",
+    "contact_email": "socket.io@socket.io",
+    "contact_name": "Socket Io (blog)",
+    "subject": "Socket's npm package provenance work caught my attention because supply chain security in open-source ecosystems is where detection and verification logic have to scale across millions of dependencies.",
+    "sent_at": "2026-05-15 15:13"
   }
 ]

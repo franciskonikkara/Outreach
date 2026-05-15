@@ -79,5 +79,23 @@
     "date_sent": "2026-05-06",
     "subject": "IoT and wireless sensor networks \u2014 attack surface under resource constraints",
     "status": "sent"
+  },
+  {
+    "name": "Saba Eskandarian",
+    "email": "saba@cs.stanford.edu",
+    "university": "Stanford University",
+    "research_area": "applied cryptography",
+    "date_sent": "2026-05-15",
+    "subject": "Applied cryptography and detection engineering in incident response",
+    "status": "sent"
+  },
+  {
+    "name": "Anitha Gollamudi",
+    "email": "gollamudi@g.harvard.edu",
+    "university": "Harvard University",
+    "research_area": "cryptography",
+    "date_sent": "2026-05-15",
+    "subject": "Cryptography and detection systems \u2014 connecting on key derivation and forensic automation",
+    "status": "sent"
   }
 ]
